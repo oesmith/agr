@@ -1,0 +1,4 @@
+LDB_ADDRESS=https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx
+LDB_TOKEN=x
+TRANSPORTAPI_APP_ID=x
+TRANSPORTAPI_API_KEY=x
