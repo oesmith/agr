@@ -1,0 +1,38 @@
+{{define "trains/dep"}}
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>{{.OriginCode}} -> {{.DestinationCode}}</title>
+<style>
+  body { font-family: monospace }
+  h1 { font-size: 1.0em; font-weight: normal }
+  .error { color: red }
+  .unknown { color: #aaa }
+</style>
+</head>
+<body>
+<h1>{{.OriginCode}} -> {{.DestinationCode}}</h1>
+
+{{if .LdbError}}<p class="error">LDB: {{.LdbError}}</p>{{end}}
+{{if .TransportapiError}}<p class="error">TAPI: {{.TransportapiError}}</p>{{end}}
+
+{{if .Departures}}
+<table width="100%">
+{{range .Departures}}
+<tr>
+<td>{{.ScheduledDeparture}}</td>
+<td>{{.EstimatedDeparture}}</td>
+{{if .ScheduledPlatform}}<td>{{.ScheduledPlatform}}</td>{{else}}<td class="unknown">?</td>{{end}}
+{{if .EstimatedPlatform}}<td>{{.EstimatedPlatform}}</td>{{else}}<td class="unknown">?</td>{{end}}
+<td>{{.DestinationCode}}</td>
+<td>{{.DestinationName}}</td>
+</tr>
+{{end}}
+</table>
+{{end}}
+
+</table>
+</body>
+</html>
+{{end}}
