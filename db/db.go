@@ -9,7 +9,7 @@ type DB struct {
 }
 
 func Open(path string) (*DB, error) {
-	db, err := bolt.Open(path, 0644, nil)
+	db, err := bolt.Open(path, 0600, nil)
 	if err != nil {
 		return nil, err
 	}
