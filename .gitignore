@@ -1,5 +1,6 @@
 agr
 keys.sh
+dev.db
 
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
