@@ -1,17 +1,18 @@
 package db
 
 import (
-	"github.com/boltdb/bolt"
+	"errors"
+
+	"github.com/oesmith/agr/db/model"
 )
 
-type DB struct {
-	*bolt.DB
-}
+var (
+	NoSuchUserError = errors.New("No such user")
+	UserAlreadyExistsError = errors.New("User already exists")
+)
 
-func Open(path string) (*DB, error) {
-	db, err := bolt.Open(path, 0600, nil)
-	if err != nil {
-		return nil, err
-	}
-	return &DB{db}, nil
+type DB interface {
+	Close() error
+	CreateUser(user *model.User) error
+	GetUser(username string) (*model.User, error)
 }
