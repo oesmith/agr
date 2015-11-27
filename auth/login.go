@@ -25,7 +25,7 @@ func (l *loginHandler) performLogin(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 		return
 	}
-	c, err := l.auth.AuthCookie(user)
+	c, err := l.auth.AuthCookie(user.Username)
 	if err != nil {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return

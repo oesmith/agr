@@ -6,7 +6,6 @@ import (
 
 	"github.com/gorilla/securecookie"
 	"github.com/oesmith/agr/db"
-	"github.com/oesmith/agr/db/model"
 )
 
 import "flag"
@@ -50,9 +49,9 @@ func (a *Auth) Handler() http.Handler {
 	return mux
 }
 
-func (a *Auth) AuthCookie(u *model.User) (*http.Cookie, error) {
+func (a *Auth) AuthCookie(u string) (*http.Cookie, error) {
 	value := map[string]string{
-		"username": u.Username,
+		"username": u,
 	}
 	encoded, err := a.secureCookie.Encode(authCookie, value)
 	if err != nil {
@@ -66,4 +65,14 @@ func (a *Auth) AuthCookie(u *model.User) (*http.Cookie, error) {
 		Expires: time.Now().Add(cookieExpiry),
 	}
 	return ret, nil
+}
+
+// VerifyCookie checks the given cookie is valid and returns the username
+// encoded within.
+func (a *Auth) VerifyCookie(c *http.Cookie) (string, error) {
+	value := make(map[string]string)
+	if err := a.secureCookie.Decode(authCookie, c.Value, &value); err != nil {
+		return "", err
+	}
+	return value["username"], nil
 }
