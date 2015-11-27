@@ -1,28 +1,20 @@
 package db
 
 import (
-	"io/ioutil"
 	"os"
 	"reflect"
 	"testing"
 
 	"github.com/oesmith/agr/db/model"
+	dbt "github.com/oesmith/agr/db/testing"
 )
 
 var db DB
 
 func TestMain(m *testing.M) {
-	f, err := ioutil.TempFile("", "testdb")
-	if err != nil {
-		panic(err)
-	}
-	p := f.Name()
-	f.Close()
+	p := dbt.TestDBPath()
 	defer os.Remove(p)
-	db, err = Open(p)
-	if err != nil {
-		panic(err)
-	}
+	db = Must(Open(p))
 	defer db.Close()
 	m.Run()
 }

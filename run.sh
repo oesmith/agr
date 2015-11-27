@@ -32,4 +32,6 @@ fi
   -ldb_address "$LDB_ADDRESS" \
   -ldb_token "$LDB_TOKEN" \
   -transportapi_app_id "$TRANSPORTAPI_APP_ID" \
-  -transportapi_api_key "$TRANSPORTAPI_API_KEY"
+  -transportapi_api_key "$TRANSPORTAPI_API_KEY" \
+  -cookie_key "$COOKIE_KEY" \
+  -password_salt "$PASSWORD_SALT"

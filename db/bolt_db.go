@@ -35,6 +35,13 @@ func Open(path string) (DB, error) {
 	return &boltDB{db}, nil
 }
 
+func Must(db DB, err error) DB {
+	if err != nil {
+		panic(err)
+	}
+	return db
+}
+
 func (db *boltDB) GetUser(username string) (*model.User, error) {
 	var user *model.User
 	err := db.View(func(tx *bolt.Tx) error {

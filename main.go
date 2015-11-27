@@ -5,7 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	db "github.com/oesmith/agr/db"
+	"github.com/oesmith/agr/auth"
+	"github.com/oesmith/agr/db"
 	_ "github.com/oesmith/agr/trains"
 )
 
@@ -15,10 +16,12 @@ var (
 
 func main() {
 	flag.Parse()
-	_, err := db.Open(*dbPath)
+	d, err := db.Open(*dbPath)
 	if err != nil {
 		log.Fatal("Unable to open database:", err.Error())
 	}
+	a := auth.NewAuth(d)
+	http.Handle(auth.PathPrefix, a.Handler())
 	log.Print("Listening on :8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
