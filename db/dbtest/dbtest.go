@@ -1,4 +1,4 @@
-package testing
+package dbtest
 
 import (
 	"github.com/oesmith/agr/db"

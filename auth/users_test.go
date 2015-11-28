@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/oesmith/agr/db"
-	dbt "github.com/oesmith/agr/db/testing"
+	"github.com/oesmith/agr/db/dbtest"
 )
 
 func TestAuthoriseUser_UserNotFound(t *testing.T) {
-	auth := NewAuth(dbt.NewFakeDB())
+	auth := NewAuth(dbtest.NewFakeDB())
 	_, err := auth.AuthoriseUser("missinguser", "password")
 	if err != db.NoSuchUserError {
 		t.Fatal("Expected NoSuchUserError, got", err)

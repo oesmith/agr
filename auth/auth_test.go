@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/oesmith/agr/db/model"
-	dbt "github.com/oesmith/agr/db/testing"
+	"github.com/oesmith/agr/db/dbtest"
 )
 
 func TestAuthCookie_VerifyCookie(t *testing.T) {
-	a := NewAuth(dbt.NewFakeDB())
+	a := NewAuth(dbtest.NewFakeDB())
 	c, err := a.AuthCookie("username")
 	if err != nil {
 		t.Fatal(err)
@@ -34,7 +34,7 @@ func TestAuthCookie_VerifyCookie(t *testing.T) {
 // setupUser creates a new database and auth instance with the given user
 // configured.
 func setupUser(u, p string) (*Auth, error) {
-	d := dbt.NewFakeDB()
+	d := dbtest.NewFakeDB()
 	auth := NewAuth(d)
 	pw, err := auth.EncryptPassword(p)
 	if err != nil {
