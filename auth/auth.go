@@ -31,13 +31,6 @@ func New(db db.DB) *Auth {
 	return newAuthWithKeys(db, []byte(*cookieKeyFlag), []byte(*passwordSaltFlag))
 }
 
-func (a *Auth) Handler() http.Handler {
-	mux := http.NewServeMux()
-	mux.Handle(PathPrefix + "login", &loginHandler{a})
-	mux.Handle(PathPrefix + "logout", &logoutHandler{a})
-	return mux
-}
-
 func (a *Auth) AuthCookie(u string) (*http.Cookie, error) {
 	value := map[string]string{
 		"username": u,

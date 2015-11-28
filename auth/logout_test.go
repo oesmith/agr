@@ -4,18 +4,19 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/oesmith/agr/db/dbtest"
 )
 
 func TestLogout_NoGet(t *testing.T) {
 	auth := setupAuth(dbtest.NewFakeDB())
-	r, err := http.NewRequest("GET", "/auth/logout", nil)
+	r, err := http.NewRequest("GET", "", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	w := httptest.NewRecorder()
-	auth.Handler().ServeHTTP(w, r)
+	auth.LogoutHandler(w, r)
 	if w.Code != http.StatusBadRequest {
 		t.Error("Expected StatusBadRequest, got", w.Code)
 	}
@@ -26,17 +27,22 @@ func TestLogout_NoGet(t *testing.T) {
 
 func TestLogout(t *testing.T) {
 	auth := setupAuth(dbtest.NewFakeDB())
-	r, err := http.NewRequest("POST", "/auth/logout", nil)
+	r, err := http.NewRequest("POST", "", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	w := httptest.NewRecorder()
-	auth.Handler().ServeHTTP(w, r)
+	auth.LogoutHandler(w, r)
 	if w.Code != http.StatusOK {
 		t.Error("Expected StatusOK, got", w.Code)
 	}
-	cookieHeader := w.Header().Get("Set-Cookie")
-	if cookieHeader != "auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 UTC; HttpOnly" {
-		t.Error("Expected expired auth cookie, got", cookieHeader)
+	res := http.Response{Header: w.Header()}
+	c := res.Cookies()[0]
+	if c.Name != authCookie ||
+			c.Value != "" ||
+			c.Path != "/" ||
+			!c.Expires.Before(time.Now()) ||
+			!c.HttpOnly {
+		t.Error("Expected expired auth cookie, got", c)
 	}
 }

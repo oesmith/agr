@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/oesmith/agr/auth"
 	"github.com/oesmith/agr/db"
 	_ "github.com/oesmith/agr/trains"
@@ -21,7 +22,10 @@ func main() {
 		log.Fatal("Unable to open database:", err.Error())
 	}
 	a := auth.New(d)
-	http.Handle(auth.PathPrefix, a.Handler())
+	r := mux.NewRouter()
+	r.HandleFunc("/auth/login", a.LoginHandler)
+	r.HandleFunc("/auth/logout", a.LogoutHandler)
+	http.Handle("/", r)
 	log.Print("Listening on :8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
