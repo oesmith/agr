@@ -1,15 +1,14 @@
 package auth
 
 import (
-	"strings"
 	"testing"
 
+	"github.com/oesmith/agr/db/model"
 	dbt "github.com/oesmith/agr/db/testing"
 )
 
 func TestAuthCookie_VerifyCookie(t *testing.T) {
-	d := dbt.NewFakeDB()
-	a := newAuthWithKeys(d, []byte(strings.Repeat("c", 64)), []byte(strings.Repeat("p", 64)))
+	a := NewAuth(dbt.NewFakeDB())
 	c, err := a.AuthCookie("username")
 	if err != nil {
 		t.Fatal(err)
@@ -30,4 +29,20 @@ func TestAuthCookie_VerifyCookie(t *testing.T) {
 	if u != "username" {
 		t.Fatal("Expected 'username', got", u)
 	}
+}
+
+// setupUser creates a new database and auth instance with the given user
+// configured.
+func setupUser(u, p string) (*Auth, error) {
+	d := dbt.NewFakeDB()
+	auth := NewAuth(d)
+	pw, err := auth.EncryptPassword(p)
+	if err != nil {
+		return nil, err
+	}
+	err = d.CreateUser(&model.User{u, pw})
+	if err != nil {
+		return nil, err
+	}
+	return auth, nil
 }

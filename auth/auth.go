@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"crypto/rand"
 	"net/http"
 	"time"
 
@@ -28,7 +29,9 @@ type Auth struct {
 }
 
 func NewAuth(db db.DB) *Auth {
-	return newAuthWithKeys(db, []byte(*cookieKeyFlag), []byte(*passwordSaltFlag))
+	cookieKey := keyData(*cookieKeyFlag)
+	passwordSalt := keyData(*passwordSaltFlag)
+	return newAuthWithKeys(db, cookieKey, passwordSalt)
 }
 
 func newAuthWithKeys(db db.DB, cookieKey []byte, passwordSalt []byte) *Auth {
@@ -40,6 +43,19 @@ func newAuthWithKeys(db db.DB, cookieKey []byte, passwordSalt []byte) *Auth {
 		passwordSalt: passwordSalt,
 		secureCookie: securecookie.New(cookieKey, nil),
 	}
+}
+
+// keyData extracts key data from a string. If the string is empty, uses
+// crypto/rand to generate a random key instead.
+func keyData(s string) []byte {
+	if s != "" {
+		return []byte(s)
+	}
+	b := make([]byte, 64)
+	if _, err := rand.Read(b); err != nil {
+		panic(err)
+	}
+	return b
 }
 
 func (a *Auth) Handler() http.Handler {

@@ -10,14 +10,10 @@ type loginHandler struct {
 }
 
 func (l *loginHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		l.performLogin(w, r)
-	} else {
+	if r.Method != "POST" {
 		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		return
 	}
-}
-
-func (l *loginHandler) performLogin(w http.ResponseWriter, r *http.Request) {
 	username := r.PostFormValue("username")
 	password := r.PostFormValue("password")
 	user, err := l.auth.AuthoriseUser(username, password)
@@ -31,5 +27,5 @@ func (l *loginHandler) performLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	http.SetCookie(w, c)
-	fmt.Print(w, "OK")
+	fmt.Fprint(w, "OK")
 }
