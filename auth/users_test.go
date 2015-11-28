@@ -8,7 +8,7 @@ import (
 )
 
 func TestAuthoriseUser_UserNotFound(t *testing.T) {
-	auth := NewAuth(dbtest.NewFakeDB())
+	auth := setupAuth(dbtest.NewFakeDB())
 	_, err := auth.AuthoriseUser("missinguser", "password")
 	if err != db.NoSuchUserError {
 		t.Fatal("Expected NoSuchUserError, got", err)

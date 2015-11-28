@@ -9,7 +9,7 @@ import (
 )
 
 func TestLogout_NoGet(t *testing.T) {
-	auth := NewAuth(dbtest.NewFakeDB())
+	auth := setupAuth(dbtest.NewFakeDB())
 	r, err := http.NewRequest("GET", "/auth/logout", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -25,7 +25,7 @@ func TestLogout_NoGet(t *testing.T) {
 }
 
 func TestLogout(t *testing.T) {
-	auth := NewAuth(dbtest.NewFakeDB())
+	auth := setupAuth(dbtest.NewFakeDB())
 	r, err := http.NewRequest("POST", "/auth/logout", nil)
 	if err != nil {
 		t.Fatal(err)

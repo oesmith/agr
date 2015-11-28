@@ -20,7 +20,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Unable to open database:", err.Error())
 	}
-	a := auth.NewAuth(d)
+	a := auth.New(d)
 	http.Handle(auth.PathPrefix, a.Handler())
 	log.Print("Listening on :8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))

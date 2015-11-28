@@ -1,14 +1,16 @@
 package auth
 
 import (
+	"crypto/rand"
 	"testing"
 
+	"github.com/oesmith/agr/db"
 	"github.com/oesmith/agr/db/model"
 	"github.com/oesmith/agr/db/dbtest"
 )
 
 func TestAuthCookie_VerifyCookie(t *testing.T) {
-	a := NewAuth(dbtest.NewFakeDB())
+	a := setupAuth(dbtest.NewFakeDB())
 	c, err := a.AuthCookie("username")
 	if err != nil {
 		t.Fatal(err)
@@ -35,7 +37,7 @@ func TestAuthCookie_VerifyCookie(t *testing.T) {
 // configured.
 func setupUser(u, p string) (*Auth, error) {
 	d := dbtest.NewFakeDB()
-	auth := NewAuth(d)
+	auth := setupAuth(d)
 	pw, err := auth.EncryptPassword(p)
 	if err != nil {
 		return nil, err
@@ -45,4 +47,17 @@ func setupUser(u, p string) (*Auth, error) {
 		return nil, err
 	}
 	return auth, nil
+}
+
+func setupAuth(db db.DB) *Auth {
+	return newAuthWithKeys(db, keyData(), keyData())
+}
+
+// keyData uses crypto/rand to generate a random 64-byte key.
+func keyData() []byte {
+	b := make([]byte, 64)
+	if _, err := rand.Read(b); err != nil {
+		panic(err)
+	}
+	return b
 }

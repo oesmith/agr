@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"crypto/rand"
 	"net/http"
 	"time"
 
@@ -28,34 +27,8 @@ type Auth struct {
 	secureCookie *securecookie.SecureCookie
 }
 
-func NewAuth(db db.DB) *Auth {
-	cookieKey := keyData(*cookieKeyFlag)
-	passwordSalt := keyData(*passwordSaltFlag)
-	return newAuthWithKeys(db, cookieKey, passwordSalt)
-}
-
-func newAuthWithKeys(db db.DB, cookieKey []byte, passwordSalt []byte) *Auth {
-	if len(cookieKey) != 64 {
-		panic("Cookie key should be 64 bytes long")
-	}
-	return &Auth{
-		db: db,
-		passwordSalt: passwordSalt,
-		secureCookie: securecookie.New(cookieKey, nil),
-	}
-}
-
-// keyData extracts key data from a string. If the string is empty, uses
-// crypto/rand to generate a random key instead.
-func keyData(s string) []byte {
-	if s != "" {
-		return []byte(s)
-	}
-	b := make([]byte, 64)
-	if _, err := rand.Read(b); err != nil {
-		panic(err)
-	}
-	return b
+func New(db db.DB) *Auth {
+	return newAuthWithKeys(db, []byte(*cookieKeyFlag), []byte(*passwordSaltFlag))
 }
 
 func (a *Auth) Handler() http.Handler {
@@ -91,4 +64,15 @@ func (a *Auth) VerifyCookie(c *http.Cookie) (string, error) {
 		return "", err
 	}
 	return value["username"], nil
+}
+
+func newAuthWithKeys(db db.DB, cookieKey []byte, passwordSalt []byte) *Auth {
+	if len(cookieKey) != 64 {
+		panic("Cookie key should be 64 bytes long")
+	}
+	return &Auth{
+		db: db,
+		passwordSalt: passwordSalt,
+		secureCookie: securecookie.New(cookieKey, nil),
+	}
 }
