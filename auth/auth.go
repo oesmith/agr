@@ -1,19 +1,22 @@
 package auth
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
+	"github.com/gorilla/context"
 	"github.com/gorilla/securecookie"
 	"github.com/oesmith/agr/db"
+	"github.com/oesmith/agr/db/model"
 )
 
 import "flag"
 
 const (
-	PathPrefix = "/auth/"
 	authCookie = "auth"
 	cookieExpiry = time.Hour * 24 * 60 // 60-day cookie validity
+	userKey = "oesmith/agr/user"
 )
 
 var (
@@ -22,6 +25,8 @@ var (
 )
 
 type Auth struct {
+	PingHandler http.Handler
+
 	db db.DB
 	passwordSalt []byte
 	secureCookie *securecookie.SecureCookie
@@ -51,21 +56,44 @@ func (a *Auth) AuthCookie(u string) (*http.Cookie, error) {
 
 // VerifyCookie checks the given cookie is valid and returns the username
 // encoded within.
-func (a *Auth) VerifyCookie(c *http.Cookie) (string, error) {
+func (a *Auth) VerifyCookie(c *http.Cookie) (*model.User, error) {
 	value := make(map[string]string)
 	if err := a.secureCookie.Decode(authCookie, c.Value, &value); err != nil {
-		return "", err
+		return nil, err
 	}
-	return value["username"], nil
+	u, err := a.db.GetUser(value["username"])
+	if err != nil {
+		return nil, err
+	}
+	return u, nil
+}
+
+func (a * Auth) RequireUser(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if c, err := r.Cookie(authCookie); err == nil && c != nil {
+			if u, err := a.VerifyCookie(c); err == nil {
+				context.Set(r, userKey, u)
+				h.ServeHTTP(w, r)
+				return
+			}
+		}
+		http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
+	})
+}
+
+func (a *Auth) pingHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "OK")
 }
 
 func newAuthWithKeys(db db.DB, cookieKey []byte, passwordSalt []byte) *Auth {
 	if len(cookieKey) != 64 {
 		panic("Cookie key should be 64 bytes long")
 	}
-	return &Auth{
+	a := &Auth{
 		db: db,
 		passwordSalt: passwordSalt,
 		secureCookie: securecookie.New(cookieKey, nil),
 	}
+	a.PingHandler = a.RequireUser(http.HandlerFunc(a.pingHandler))
+	return a
 }

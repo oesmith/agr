@@ -23,8 +23,9 @@ func main() {
 	}
 	a := auth.New(d)
 	r := mux.NewRouter()
-	r.HandleFunc("/auth/login", a.LoginHandler)
-	r.HandleFunc("/auth/logout", a.LogoutHandler)
+	r.HandleFunc("/api/v1/auth/login", a.LoginHandler)
+	r.HandleFunc("/api/v1/auth/logout", a.LogoutHandler)
+	r.Handle("/api/v1/auth/ping", a.PingHandler)
 	http.Handle("/", r)
 	log.Print("Listening on :8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
