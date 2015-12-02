@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Agr</title>
+  <title>AGR</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<header>
+  <h1>AGR</h1>
+  <nav>
+    <%= link_to("Trains", trains_path, class: "nav-item") %> |
+    <%= link_to("Social", "#TODO", class: "nav-item") %> |
+    <%= link_to("News", "#TODO", class: "nav-item") %>
+  </nav>
+</header>
+
 
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>

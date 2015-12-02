@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from: CPM
+  to: PAD
+  user: one
+
+two:
+  from: PAD
+  to: CPM
+  user: one
+
+three:
+  from: BRI
+  to: CPM
+  user: two
