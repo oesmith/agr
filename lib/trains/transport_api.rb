@@ -10,19 +10,21 @@ module Trains
 
     @@config = Config.new
 
-    def TransportAPI.setup(&block)
+    def self.setup(&block)
       block.call(config)
       config.validate!
     end
 
-    def live_departures(station)
-      JSON.parse(Net::HTTP.get(
-        "https://transportapi.com/v3/uk/train/station/#{station.upcase}/" +
-        "live.json?app_id=#{config.app_id}&api_key=#{config.api_key}"))
+    def self.live_departures(station)
+      JSON.parse(
+        Net::HTTP.get(
+          URI(
+            "https://transportapi.com/v3/uk/train/station/#{station.upcase}/" +
+            "live.json?app_id=#{config.app_id}&api_key=#{config.api_key}")))
     end
 
     private
-      def TransportAPI.config
+      def self.config
         @@config
       end
   end
