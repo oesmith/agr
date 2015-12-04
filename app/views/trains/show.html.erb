@@ -10,5 +10,27 @@
   <%= @train.to %>
 </p>
 
+<h3>Departures</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Destination</th>
+      <th>Platform</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @departures.each do |d| %>
+      <tr>
+        <td><%= d.aimed_departure_time %></td>
+        <td><%= d.destination_name %></td>
+        <td><%= d.platform %></td>
+        <td><%= d.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_train_path(@train) %> |
 <%= link_to 'Back', trains_path %>
