@@ -1,4 +1,4 @@
-require 'trains/transport_api'
+require 'trains'
 
 Trains::TransportAPI.setup do |config|
   if Rails.env.test?
