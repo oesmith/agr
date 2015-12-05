@@ -9,3 +9,11 @@ Trains::TransportAPI.setup do |config|
     config.api_key = ENV["TRANSPORTAPI_API_KEY"]
   end
 end
+
+Trains::LDB.setup do |config|
+  if Rails.env.test?
+    config.api_key = "test_api_key"
+  else
+    config.api_key = ENV["LDB_TOKEN"]
+  end
+end
