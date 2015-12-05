@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'minitest/mock'
 
 class TrainsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -29,8 +30,13 @@ class TrainsControllerTest < ActionController::TestCase
   end
 
   test "should show train" do
-    get :show, id: @train
-    assert_response :success
+    # Stub out live departures calls, they're unit-tested elsewhere.
+    Trains::LDB.stub(:live_departures, []) do
+      Trains::TransportAPI.stub(:live_departures, []) do
+        get :show, id: @train
+        assert_response :success
+      end
+    end
   end
 
   test "should get edit" do

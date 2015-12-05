@@ -9,6 +9,7 @@ class TrainsController < ApplicationController
   # GET /trains/1
   def show
     @departures = Trains::TransportAPI.live_departures(@train.from)
+    @live = Trains::LDB.live_departures(@train.from, @train.to)
   end
 
   # GET /trains/new

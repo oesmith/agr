@@ -10,6 +10,28 @@
   <%= @train.to %>
 </p>
 
+<h3>Live Departures</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Destination</th>
+      <th>Platform</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @live.each do |s| %>
+      <tr>
+        <td><%= s.scheduled_time %></td>
+        <td><%= s.destination_name %></td>
+        <td><%= s.platform %></td>
+        <td><%= s.estimated_time %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <h3>Departures</h3>
 <table>
   <thead>
