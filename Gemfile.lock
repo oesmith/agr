@@ -53,6 +53,8 @@ GEM
     capistrano-rails (1.1.5)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano3-unicorn (0.2.1)
+      capistrano (~> 3.1, >= 3.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -179,6 +181,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capistrano-rails
+  capistrano3-unicorn
   devise
   jquery-rails
   nokogiri
