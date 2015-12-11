@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201210920) do
+ActiveRecord::Schema.define(version: 20151208083200) do
+
+  create_table "streams", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "type",       null: false
+    t.string   "remote_id",  null: false
+    t.text     "config",     null: false
+    t.text     "profile"
+    t.text     "stream"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "trains", force: :cascade do |t|
     t.string   "from"

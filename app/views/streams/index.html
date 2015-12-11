@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Streams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @streams.each do |stream| %>
+      <tr>
+        <td><%= stream.type_name %></td>
+        <td><%= stream.printable_name %></td>
+        <td><%= link_to 'Show', stream %></td>
+        <td><%= link_to 'Destroy', stream_path(stream), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stream', new_stream_path %>

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'auth/twitter/callback' => 'callback#twitter'
 
   resources :trains
+  resources :streams
+  resources :twitter_streams
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
