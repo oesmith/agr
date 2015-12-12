@@ -1,4 +1,5 @@
-class TwitterProfile < StreamProperty
+class TwitterProfile
+  include ActiveModel::Model
   attr_accessor :screen_name, :real_name, :profile_image
 
   def self.from_oauth(h)

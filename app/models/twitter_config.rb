@@ -1,4 +1,5 @@
-class TwitterConfig < StreamProperty
+class TwitterConfig
+  include ActiveModel::Model
   attr_accessor :oauth_token, :oauth_secret
 
   def self.from_oauth(h)
