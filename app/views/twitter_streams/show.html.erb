@@ -15,4 +15,17 @@
   <img src="<%= @twitter_stream.profile.profile_image %>">
 </p>
 
+<% if !@twitter_stream.stream.nil? %>
+  <h3>Timeline</h3>
+  
+  <ul class="twitter-timeline">
+    <% @twitter_stream.stream.timeline.each do |tweet| %>
+      <li class="twitter-post">
+        <%= render partial: "tweet", locals: { tweet: tweet } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+
 <%= link_to 'Back', streams_path %>

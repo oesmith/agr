@@ -1,0 +1,45 @@
+.twitter-timeline {
+  list-style-type: none;
+  margin: 0;
+  max-width: 33rem;
+  padding: 0;
+}
+
+.tweet {
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.tweet-author-name {
+  font-weight: bold;
+}
+
+.tweet-media {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tweet-media-photo {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0;
+}
+
+.tweet-media-photo-img {
+  max-width: 100%;
+}
+
+.tweet-data-closed .tweet-data-hide,
+.tweet-data-closed .tweet-data-json {
+  display: none;
+}
+
+.tweet-data-open .tweet-data-show {
+  display: none;
+}
+
+.tweet-quote,
+.tweet-retweet {
+  margin: 0 0.5rem;
+}

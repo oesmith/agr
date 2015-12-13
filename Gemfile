@@ -4,6 +4,7 @@ gem 'devise'
 gem 'nokogiri'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'twitter'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
