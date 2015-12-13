@@ -15,7 +15,7 @@
   <img src="<%= @twitter_stream.profile.profile_image %>">
 </p>
 
-<% if !@twitter_stream.stream.nil? %>
+<% if !@twitter_stream.stream.timeline.nil? %>
   <h3>Timeline</h3>
   
   <ul class="twitter-timeline">
