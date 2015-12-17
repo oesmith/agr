@@ -1,19 +1,16 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Screen name:</strong>
-  <%= @twitter_stream.profile.screen_name %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @twitter_stream.profile.real_name %>
-</p>
-
-<p>
-  <strong>Photo:</strong>
-  <img src="<%= @twitter_stream.profile.profile_image %>">
-</p>
+<div class="twitter-profile">
+  <div class="twitter-profile-image"
+    style="background-image: url(<%= @twitter_stream.profile.profile_image %>)">
+  </div>
+  <div class="twitter-profile-attributes">
+    <div class="twitter-profile-name">
+      <%= @twitter_stream.profile.real_name %>
+    </div>
+    <div class="twitter-profile-screen-name">
+      @<%= @twitter_stream.profile.screen_name %>
+    </div>
+  </div>
+</div>
 
 <% if !@twitter_stream.stream.timeline.nil? %>
   <h3>Timeline</h3>
