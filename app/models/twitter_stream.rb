@@ -13,7 +13,7 @@ class TwitterStream < Stream
   
   def refresh
     stream.timeline = client.home_timeline(count: 100)
-    stream.mentions = client.mentions_timeline(count: 50)
+    stream.mentions = client.mentions_timeline(count: 5)
     self
   end
   

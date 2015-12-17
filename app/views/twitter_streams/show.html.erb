@@ -12,6 +12,18 @@
   </div>
 </div>
 
+<% if !@twitter_stream.stream.mentions.nil? %>
+  <h3>Mentions</h3>
+
+  <ul class="twitter-timeline">
+    <% @twitter_stream.stream.mentions.each do |tweet| %>
+      <li class="twitter-post">
+        <%= render partial: "tweet", locals: { tweet: tweet } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <% if !@twitter_stream.stream.timeline.nil? %>
   <h3>Timeline</h3>
   
