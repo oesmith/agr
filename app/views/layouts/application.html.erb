@@ -14,10 +14,12 @@
   <nav>
     <%= link_to("Trains", trains_path, class: "nav-item") %> |
     <%= link_to("Streams", streams_path, class: "nav-item") %> |
-    <%= link_to("News", "#TODO", class: "nav-item") %>
+    <%= link_to("News", "#TODO", class: "nav-item") %> |
+    <%= link_to("Sign out", destroy_user_session_path, method: :delete, class: "nav-item") %>
   </nav>
 </header>
 
+<p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
 
 <%= yield %>
