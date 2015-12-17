@@ -4,13 +4,19 @@ module TwitterStreamsHelper
       t = ActiveSupport::SafeBuffer.new
       i = 0
       tweet.urls.each do |url|
-        t << tweet.text[i...url.indices.first]
+        t << entities.decode(tweet.text[i...url.indices.first])
         t << link_to(url.display_url, url.expanded_url.to_s)
         i = url.indices.second
       end
-      t << tweet.text[i..-1]
+      t << entities.decode(tweet.text[i..-1])
       return t
     end
-    tweet.text
+    entities.decode(tweet.text)
+  end
+
+  private
+
+  def entities
+    @htmlentities ||= HTMLEntities.new
   end
 end
