@@ -1,3 +1,38 @@
 body {
-  font-family: sans-serif;
+  font-family: -apple-system, sans-serif;
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+.login-content {
+  margin: 5em auto;
+  padding: 8px;
+  max-width: 33em;
+}
+
+.app-content,
+.header-content {
+  margin: 0 auto;
+  max-width: 940px;
+  padding: 8px;
+}
+
+.header {
+  background-color: #3F51B5;
+  color: white;
+}
+
+header a,
+header a:visited,
+header a:hover {
+  color: white;
+  text-decoration: none;
 }

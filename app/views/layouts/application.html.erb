@@ -9,20 +9,23 @@
 </head>
 <body>
 
-<header>
-  <h1>AGR</h1>
-  <nav>
-    <%= link_to("Trains", trains_path, class: "nav-item") %> |
-    <%= link_to("Streams", streams_path, class: "nav-item") %> |
-    <%= link_to("News", "#TODO", class: "nav-item") %> |
-    <%= link_to("Sign out", destroy_user_session_path, method: :delete, class: "nav-item") %>
-  </nav>
+<header class="header">
+  <div class="header-content">
+    <nav>
+      <%= link_to("Trains", trains_path, class: "nav-item") %> ::
+      <%= link_to("Streams", streams_path, class: "nav-item") %> ::
+      <%= link_to("News", "#TODO", class: "nav-item") %> ::
+      <%= link_to("Sign out", destroy_user_session_path, method: :delete, class: "nav-item") %>
+    </nav>
+  </div>
 </header>
 
-<p id="alert"><%= alert %></p>
-<p id="notice"><%= notice %></p>
+<div class="app-content">
+  <p id="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
 
-<%= yield %>
+  <%= yield %>
+</div>
 
 </body>
 </html>
