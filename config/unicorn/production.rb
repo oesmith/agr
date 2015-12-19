@@ -1,4 +1,4 @@
-app_path = File.expand_path("../../..", __FILE__)
+app_path = "/home/agr/current"
 
 listen "#{app_path}/tmp/sockets/unicorn.sock"
 pid "#{app_path}/tmp/pids/unicorn.pid"
