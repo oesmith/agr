@@ -31,6 +31,14 @@
               <img class="tweet-media-photo-img"
                   src="<%= media.media_url_https %>">
             </li>
+          <% elsif media.is_a? Twitter::Media::AnimatedGif %>
+            <li class="tweet-media-gif">
+              <video class="tweet-media-gif-video" controls loop
+                  poster="<%= media.media_url_https %>">
+                <source src="<%= media.video_info.variants.first.url %>"
+                    type="<%= media.video_info.variants.first[:type] %>"/>
+              </video>
+            </li>
           <% end %>
         <% end %>
       </ul>

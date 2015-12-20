@@ -40,12 +40,14 @@
   padding: 0;
 }
 
+.tweet-media-gif,
 .tweet-media-photo {
   display: inline-block;
   margin: 0.5rem;
   padding: 0;
 }
 
+.tweet-media-gif-video,
 .tweet-media-photo-img {
   max-width: 100%;
 }
