@@ -41,14 +41,16 @@
 }
 
 .tweet-media-gif,
-.tweet-media-photo {
+.tweet-media-photo,
+.tweet-media-video {
   display: inline-block;
   margin: 0.5rem;
   padding: 0;
 }
 
 .tweet-media-gif-video,
-.tweet-media-photo-img {
+.tweet-media-photo-img,
+.tweet-media-video-video {
   max-width: 100%;
 }
 

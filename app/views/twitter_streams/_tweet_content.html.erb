@@ -35,8 +35,18 @@
             <li class="tweet-media-gif">
               <video class="tweet-media-gif-video" controls loop
                   poster="<%= media.media_url_https %>">
-                <source src="<%= media.video_info.variants.first.url %>"
-                    type="<%= media.video_info.variants.first[:type] %>"/>
+                <% media.video_info.variants.each do |v| %>
+                  <source src="<%= v.url %>" type="<%= v[:type] %>"/>
+                <% end %>
+              </video>
+            </li>
+          <% elsif media.is_a? Twitter::Media::Video %>
+            <li class="tweet-media-video">
+              <video class="tweet-media-video-video" controls preload="none"
+                  poster="<%= media.media_url_https %>">
+                <% media.video_info.variants.each do |v| %>
+                  <source src="<%= v.url %>" type="<%= v[:type] %>"/>
+                <% end %>
               </video>
             </li>
           <% end %>
