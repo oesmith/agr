@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  get 'auth/twitter/callback' => 'callback#twitter'
-
   resources :trains
-  resources :streams
-  resources :twitter_streams
 
   root 'home#index'
 

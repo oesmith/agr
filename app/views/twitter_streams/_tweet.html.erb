@@ -1,8 +1,0 @@
-<div class="tweet">
-  <%= render partial: "tweet_content", locals: { tweet: tweet } %>
-  <div class="tweet-data tweet-data-closed">
-    <a href="#" class="tweet-data-show">&raquo;</a>
-    <a href="#" class="tweet-data-hide">&laquo;</a>
-    <pre class="tweet-data-json"><%= JSON.pretty_generate(tweet.as_json) %></pre>
-  <div>
-</div>
