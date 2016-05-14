@@ -22,7 +22,7 @@ class FeedsControllerTest < ActionController::TestCase
 
   test "should create feed" do
     assert_difference('Feed.count') do
-      post :create, feed: { name: @feed.name, scrape: @feed.scrape, url: @feed.url }
+      post :create, feed: { url: @feed.url }
     end
 
     assert_redirected_to feed_path(assigns(:feed))
@@ -39,7 +39,7 @@ class FeedsControllerTest < ActionController::TestCase
   end
 
   test "should update feed" do
-    patch :update, id: @feed, feed: { name: @feed.name, scrape: @feed.scrape, url: @feed.url }
+    patch :update, id: @feed, feed: { url: @feed.url }
     assert_redirected_to feed_path(assigns(:feed))
   end
 
