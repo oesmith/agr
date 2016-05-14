@@ -175,6 +175,7 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     webmock (2.0.1)
+    webmock (1.24.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
