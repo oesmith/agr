@@ -9,7 +9,7 @@
 </p>
 
 <h3>Live Departures</h3>
-<table>
+<table class="train-deps">
   <thead>
     <tr>
       <th>Time</th>
@@ -30,8 +30,8 @@
   </tbody>
 </table>
 
-<h3>Departures</h3>
-<table>
+<h3>Station Timetable</h3>
+<table class="train-deps">
   <thead>
     <tr>
       <th>Time</th>
@@ -52,5 +52,5 @@
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_train_path(@train) %> |
-<%= link_to 'Back', trains_path %>
+<%= link_to 'Edit', edit_train_path(@train), class: :button %>
+<%= link_to 'Back', trains_path, class: :button %>
