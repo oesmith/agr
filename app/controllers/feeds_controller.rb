@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action :set_feed, only: [:show, :edit, :update, :destroy, :refresh]
 
   # GET /feeds
   def index
@@ -43,6 +43,11 @@ class FeedsController < ApplicationController
   def destroy
     @feed.destroy
     redirect_to feeds_url, notice: 'Feed was successfully destroyed.'
+  end
+
+  # POST /feeds/1/refresh
+  def refresh
+    redirect_to @feed, notice: 'Feed was successfully refreshed'
   end
 
   private

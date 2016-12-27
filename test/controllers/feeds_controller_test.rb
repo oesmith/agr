@@ -50,4 +50,9 @@ class FeedsControllerTest < ActionController::TestCase
 
     assert_redirected_to feeds_path
   end
+
+  test "should refresh feed" do
+    post :refresh, id: @feed
+    assert_redirected_to feed_path(assigns(:feed))
+  end
 end

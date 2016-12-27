@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :feeds
   devise_for :users
+
+  resources :feeds do
+    member do
+      post 'refresh'
+    end
+  end
 
   resources :trains
 
