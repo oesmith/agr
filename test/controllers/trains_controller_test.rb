@@ -2,7 +2,7 @@ require 'test_helper'
 require 'minitest/mock'
 
 class TrainsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @user = users(:one)
@@ -23,7 +23,7 @@ class TrainsControllerTest < ActionController::TestCase
 
   test "should create train" do
     assert_difference('Train.count') do
-      post :create, train: { from: @train.from, to: @train.to }
+      post :create, params: { train: { from: @train.from, to: @train.to } }
     end
     assert_equal @user, assigns(:train).user
     assert_redirected_to train_path(assigns(:train))
@@ -33,44 +33,44 @@ class TrainsControllerTest < ActionController::TestCase
     # Stub out live departures calls, they're unit-tested elsewhere.
     Trains::LDB.stub(:live_departures, []) do
       Trains::TransportAPI.stub(:live_departures, []) do
-        get :show, id: @train
+        get :show, params: { id: @train }
         assert_response :success
       end
     end
   end
 
   test "should get edit" do
-    get :edit, id: @train
+    get :edit, params: { id: @train }
     assert_response :success
   end
 
   test "should update train" do
-    patch :update, id: @train, train: { from: @train.from, to: @train.to }
+    patch :update, params: { id: @train, train: { from: @train.from, to: @train.to } }
     assert_redirected_to train_path(assigns(:train))
   end
 
   test "should destroy train" do
     assert_difference('Train.count', -1) do
-      delete :destroy, id: @train
+      delete :destroy, params: { id: @train }
     end
     assert_redirected_to trains_path
   end
 
   test "should not show other user's train" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      get :show, id: trains(:three)
+      get :show, params: { id: trains(:three) }
     end
   end
 
   test "should not edit other user's train" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      get :edit, id: trains(:three)
+      get :edit, params: { id: trains(:three) }
     end
   end
 
   test "should not update other user's train" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      patch :update, id: trains(:three), train: { from: @train.from, to: @train.to }
+      patch :update, params: { id: trains(:three), train: { from: @train.from, to: @train.to } }
     end
   end
 
@@ -78,7 +78,7 @@ class TrainsControllerTest < ActionController::TestCase
     t = trains(:three)
     assert_difference('Train.count', 0) do
       assert_raises(ActiveRecord::RecordNotFound) do
-        delete :destroy, id: t
+        delete :destroy, params: { id: t }
       end
     end
   end

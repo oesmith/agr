@@ -4,7 +4,7 @@ gem 'devise'
 gem 'nokogiri'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 5.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -18,6 +18,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+
+# TODO(oliver): get rid of coffeescript.
+gem 'coffee-script'
 
 # Use Unicorn as the app server
 gem 'unicorn'
@@ -41,4 +44,7 @@ end
 
 group :test do
   gem 'webmock'
+
+  # TODO(oliver): Update to Rails 5 style tests.
+  gem 'rails-controller-testing'
 end

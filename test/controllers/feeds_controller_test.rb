@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class FeedsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @user = users(:one)
@@ -22,37 +22,37 @@ class FeedsControllerTest < ActionController::TestCase
 
   test "should create feed" do
     assert_difference('Feed.count') do
-      post :create, feed: { url: @feed.url }
+      post :create, params: { feed: { url: @feed.url } }
     end
 
     assert_redirected_to feed_path(assigns(:feed))
   end
 
   test "should show feed" do
-    get :show, id: @feed
+    get :show, params: { id: @feed }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @feed
+    get :edit, params: { id: @feed }
     assert_response :success
   end
 
   test "should update feed" do
-    patch :update, id: @feed, feed: { url: @feed.url }
+    patch :update, params: { id: @feed, feed: { url: @feed.url } }
     assert_redirected_to feed_path(assigns(:feed))
   end
 
   test "should destroy feed" do
     assert_difference('Feed.count', -1) do
-      delete :destroy, id: @feed
+      delete :destroy, params: { id: @feed }
     end
 
     assert_redirected_to feeds_path
   end
 
   test "should refresh feed" do
-    post :refresh, id: @feed
+    post :refresh, params: { id: @feed }
     assert_redirected_to feed_path(assigns(:feed))
   end
 end
