@@ -8,10 +8,6 @@
   <%= @feed.name %>
 </p>
 
-<p>
-  <strong>Scrape:</strong>
-  <%= @feed.scrape %>
-</p>
-
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
-<%= link_to 'Back', feeds_path %>
+<%= link_to 'Refresh', refresh_feed_path(@feed), method: :post, class: :button %>
+<%= link_to 'Edit', edit_feed_path(@feed), class: :button %>
+<%= link_to 'Back', feeds_path, class: :button %>

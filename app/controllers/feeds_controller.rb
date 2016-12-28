@@ -47,7 +47,8 @@ class FeedsController < ApplicationController
 
   # POST /feeds/1/refresh
   def refresh
-    redirect_to @feed, notice: 'Feed was successfully refreshed'
+    RefreshFeedJob.perform_later(@feed)
+    redirect_to @feed, notice: 'Feed was successfully enqueued for refresh'
   end
 
   private

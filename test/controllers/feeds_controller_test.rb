@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class FeedsControllerTest < ActionController::TestCase
+  include ActiveJob::TestHelper
   include Devise::Test::ControllerHelpers
 
   setup do
@@ -52,7 +53,9 @@ class FeedsControllerTest < ActionController::TestCase
   end
 
   test "should refresh feed" do
-    post :refresh, params: { id: @feed }
+    assert_enqueued_with(job: RefreshFeedJob, args: [@feed]) do
+      post :refresh, params: { id: @feed }
+    end
     assert_redirected_to feed_path(assigns(:feed))
   end
 end
