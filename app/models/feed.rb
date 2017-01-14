@@ -1,6 +1,8 @@
 require 'rss'
 
 class Feed < ActiveRecord::Base
+  belongs_to :user
+
   ALTERNATE_TYPES = ['application/atom+xml', 'application/rss+xml']
 
   def self.resolve(url, redirects=10)

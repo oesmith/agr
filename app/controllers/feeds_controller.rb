@@ -3,7 +3,7 @@ class FeedsController < ApplicationController
 
   # GET /feeds
   def index
-    @feeds = Feed.all
+    @feeds = Feed.where(user: current_user)
   end
 
   # GET /feeds/1
@@ -23,6 +23,7 @@ class FeedsController < ApplicationController
   def create
     begin
       @feed = Feed.resolve(URI(feed_params[:url]))
+      @feed.user = current_user
     rescue
       @feed = Feed.new(feed_params)
       @feed.errors.add(:url, "Fetch error")
@@ -55,7 +56,7 @@ class FeedsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feed
-      @feed = Feed.find(params[:id])
+      @feed = Feed.find_by!(id: params[:id], user: current_user)
     end
 
     # Only allow a trusted parameter "white list" through.
