@@ -3,9 +3,7 @@
 one:
   url: MyString
   name: MyString
-  scrape: MyText
 
 two:
   url: MyString
   name: MyString
-  scrape: MyText

@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :feeds do
-    member do
-      post 'refresh'
-    end
-  end
-
+  resources :feeds
   resources :trains
 
   root 'home#index'

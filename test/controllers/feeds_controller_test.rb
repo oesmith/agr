@@ -4,6 +4,17 @@ class FeedsControllerTest < ActionController::TestCase
   include ActiveJob::TestHelper
   include Devise::Test::ControllerHelpers
 
+  RSS_DOC = <<END
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>RSS Feed Title</title>
+    <link>http://agr.test/</link>
+    <description>Test feed</description>
+  </channel>
+</rss>
+END
+
   setup do
     @user = users(:one)
     sign_in @user
@@ -22,8 +33,10 @@ class FeedsControllerTest < ActionController::TestCase
   end
 
   test "should create feed" do
+    stub_request(:get, 'http://agr.test/rss').to_return(body: RSS_DOC)
+
     assert_difference('Feed.count') do
-      post :create, params: { feed: { url: @feed.url } }
+      post :create, params: { feed: { url: 'http://agr.test/rss' } }
     end
 
     assert_redirected_to feed_path(assigns(:feed))
@@ -50,12 +63,5 @@ class FeedsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to feeds_path
-  end
-
-  test "should refresh feed" do
-    assert_enqueued_with(job: RefreshFeedJob, args: [@feed]) do
-      post :refresh, params: { id: @feed }
-    end
-    assert_redirected_to feed_path(assigns(:feed))
   end
 end

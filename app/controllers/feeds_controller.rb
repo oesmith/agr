@@ -21,7 +21,14 @@ class FeedsController < ApplicationController
 
   # POST /feeds
   def create
-    @feed = Feed.new(feed_params)
+    begin
+      @feed = Feed.resolve(URI(feed_params[:url]))
+    rescue
+      @feed = Feed.new(feed_params)
+      @feed.errors.add(:url, "Fetch error")
+      render :new
+      return
+    end
 
     if @feed.save
       redirect_to @feed, notice: 'Feed was successfully created.'
@@ -43,12 +50,6 @@ class FeedsController < ApplicationController
   def destroy
     @feed.destroy
     redirect_to feeds_url, notice: 'Feed was successfully destroyed.'
-  end
-
-  # POST /feeds/1/refresh
-  def refresh
-    RefreshFeedJob.perform_later(@feed)
-    redirect_to @feed, notice: 'Feed was successfully enqueued for refresh'
   end
 
   private
