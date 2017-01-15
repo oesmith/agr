@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :feeds
+  resources :news
   resources :trains
 
   root 'home#index'

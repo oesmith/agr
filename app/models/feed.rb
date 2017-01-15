@@ -11,7 +11,11 @@ class Feed < ActiveRecord::Base
     res = Net::HTTP.get_response(url)
     case res
     when Net::HTTPSuccess then
-      if res.content_type == 'text/html'
+      begin
+        rss = RSS::Parser.parse(res.body)
+      rescue
+      end
+      if rss.nil?
         # Attempt to find a link[rel=alternate] in the page.
         html = Nokogiri::HTML(res.body)
         alternate = html.css('link[rel="alternate"]').find do |e|
@@ -20,7 +24,6 @@ class Feed < ActiveRecord::Base
         raise "Unable to find a feed at #{url.to_s}" if alternate.nil?
         resolve(URI.join(url, alternate.attributes['href'].value), redirects - 1)
       else
-        rss = RSS::Parser.parse(res.body)
         case "#{rss.feed_type}/#{rss.feed_version}"
         when "atom/1.0"
           Feed.new(url: url.to_s, name: rss.title.content)

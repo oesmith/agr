@@ -1,0 +1,16 @@
+<h1>News</h1>
+<p>Fetched <%= time_ago_in_words(@scrape.updated_at) %> ago (<%= @scrape.state %>)</p>
+<%= link_to 'Manage feeds', feeds_path, class: 'button' %>
+<%= link_to 'Refresh', news_index_path, method: :post, class: 'button' %>
+
+<% unless @scrape.state == 'pending' %>
+  <% @scrape.posts.first(30).each do |post| %>
+    <article>
+      <h2><%= post.title %></h2>
+      <p>
+        <%= time_ago_in_words(post.published_at) %> ago - <%= link_to post.feed.name, post.link %>
+      </p>
+      <%= sanitize(post.content, tags: %w(img a p blockquote b em strong), attributes: %w(href src)) %>
+    </article>
+  <% end %>
+<% end %>

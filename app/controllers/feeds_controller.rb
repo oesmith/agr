@@ -24,7 +24,8 @@ class FeedsController < ApplicationController
     begin
       @feed = Feed.resolve(URI(feed_params[:url]))
       @feed.user = current_user
-    rescue
+    rescue Exception => e
+      logger.debug(e)
       @feed = Feed.new(feed_params)
       @feed.errors.add(:url, "Fetch error")
       render :new
