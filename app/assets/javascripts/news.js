@@ -3,31 +3,47 @@
 
 (function() {
 
+$(document).on('touchend click', '.post-prev', function(event) {
+  prevArticle();
+});
+
+$(document).on('touchend click', '.post-next', function(event) {
+  nextArticle();
+});
+
 document.addEventListener('keypress', function(event) {
   if (event.charCode == 106 /* j */) {
-    var currentArticle = getCurrentArticle();
-    if (currentArticle != null) {
-      var nextArticle = currentArticle.nextSibling;
-      while (nextArticle != null && nextArticle.tagName != 'ARTICLE') {
-        nextArticle = nextArticle.nextSibling;
-      }
-      if (nextArticle != null) {
-        nextArticle.scrollIntoView();
-      }
-    }
+    nextArticle();
   } else if (event.charCode == 107 /* k */) {
-    var currentArticle = getCurrentArticle();
-    if (currentArticle != null) {
-      var prevArticle = currentArticle.previousSibling;
-      while (prevArticle != null && prevArticle.tagName != 'ARTICLE') {
-        prevArticle = prevArticle.previousSibling;
-      }
-      if (prevArticle != null) {
-        prevArticle.scrollIntoView();
-      }
-    }
+    prevArticle();
   }
 });
+
+function nextArticle() {
+  var currentArticle = getCurrentArticle();
+  if (currentArticle != null) {
+    var nextArticle = currentArticle.nextSibling;
+    while (nextArticle != null && nextArticle.tagName != 'ARTICLE') {
+      nextArticle = nextArticle.nextSibling;
+    }
+    if (nextArticle != null) {
+      nextArticle.scrollIntoView();
+    }
+  }
+}
+
+function prevArticle() {
+  var currentArticle = getCurrentArticle();
+  if (currentArticle != null) {
+    var prevArticle = currentArticle.previousSibling;
+    while (prevArticle != null && prevArticle.tagName != 'ARTICLE') {
+      prevArticle = prevArticle.previousSibling;
+    }
+    if (prevArticle != null) {
+      prevArticle.scrollIntoView();
+    }
+  }
+}
 
 function getCurrentArticle() {
   var articles = document.getElementsByTagName('article');
