@@ -21,7 +21,7 @@
       <p>
         <%= time_ago_in_words(post.published_at) %> ago - <%= link_to post.feed.name, post.link %>
       </p>
-      <%= sanitize(post.content, tags: %w(img a p blockquote b em strong), attributes: %w(href src)) %>
+      <%= sanitize(post.content, tags: %w(img a p blockquote b em strong i ul ol li dl dd dt), attributes: %w(href src)) %>
     </article>
   <% end %>
 <% end %>
