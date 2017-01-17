@@ -3,13 +3,8 @@
 
 (function() {
 
-$(document).on('touchend click', '.post-prev', function(event) {
-  prevArticle();
-});
-
-$(document).on('touchend click', '.post-next', function(event) {
-  nextArticle();
-});
+$(document).on('touchend click', '.post-prev', prevArticle);
+$(document).on('touchend click', '.post-next', nextArticle);
 
 document.addEventListener('keypress', function(event) {
   if (event.charCode == 106 /* j */) {
