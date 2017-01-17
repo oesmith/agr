@@ -15,8 +15,14 @@ document.addEventListener('keypress', function(event) {
 });
 
 function nextArticle() {
-  var currentArticle = getCurrentArticle();
-  if (currentArticle != null) {
+  var articles = getArticles();
+  if (articles.length == 0) {
+    return;
+  }
+  var currentArticle = getCurrentArticle(articles);
+  if (currentArticle == null) {
+    articles[0].scrollIntoView();
+  } else {
     var nextArticle = currentArticle.nextSibling;
     while (nextArticle != null && nextArticle.tagName != 'ARTICLE') {
       nextArticle = nextArticle.nextSibling;
@@ -28,21 +34,34 @@ function nextArticle() {
 }
 
 function prevArticle() {
-  var currentArticle = getCurrentArticle();
+  var articles = getArticles();
+  if (articles.length == 0) {
+    return;
+  }
+  var currentArticle = getCurrentArticle(articles);
+  var prevArticle = null;
   if (currentArticle != null) {
-    var prevArticle = currentArticle.previousSibling;
+    prevArticle = currentArticle.previousSibling;
     while (prevArticle != null && prevArticle.tagName != 'ARTICLE') {
       prevArticle = prevArticle.previousSibling;
     }
-    if (prevArticle != null) {
-      prevArticle.scrollIntoView();
-    }
+  }
+  if (prevArticle == null) {
+    document.scrollingElement.scrollTop = 0;
+  } else {
+    prevArticle.scrollIntoView();
   }
 }
 
-function getCurrentArticle() {
-  var articles = document.getElementsByTagName('article');
+function getArticles() {
+  return document.getElementsByTagName('article');
+}
+
+function getCurrentArticle(articles) {
   var scrollPos = document.scrollingElement.scrollTop + 22;
+  if (articles.length == 0 || scrollPos < articles[0].offsetTop) {
+    return null;
+  }
   for (var i = 0; i < articles.length; i++) {
     var articleEnd = articles[i].offsetTop + articles[i].offsetHeight;
     if (scrollPos < articleEnd) {
