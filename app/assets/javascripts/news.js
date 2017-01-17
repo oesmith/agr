@@ -7,9 +7,9 @@ $(document).on('touchend click', '.post-prev', prevArticle);
 $(document).on('touchend click', '.post-next', nextArticle);
 
 document.addEventListener('keypress', function(event) {
-  if (event.charCode == 106 /* j */) {
+  if (event.charCode == 106 /* J */) {
     nextArticle();
-  } else if (event.charCode == 107 /* k */) {
+  } else if (event.charCode == 107 /* K */) {
     prevArticle();
   }
 });
