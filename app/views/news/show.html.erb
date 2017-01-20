@@ -28,3 +28,7 @@
     </article>
   <% end %>
 <% end %>
+
+<% if @scrape.state == 'pending' %>
+  <script>setTimeout(function() { Turbolinks.visit(location.toString()); }, 5000);</script>
+<% end %>
