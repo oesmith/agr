@@ -2,6 +2,9 @@
 <p>Fetched <%= time_ago_in_words(@scrape.updated_at) %> ago (<%= @scrape.state %>)</p>
 <%= link_to 'Manage feeds', feeds_path, class: 'button' %>
 <%= link_to 'Refresh', news_index_path, method: :post, class: 'button' %>
+<% unless @scrape.previous.nil? %>
+  <%= link_to 'Previous', news_path(@scrape.previous), class: 'button' %>
+<% end %>
 
 <div class="post-control-touch">
   <div class="post-prev">
