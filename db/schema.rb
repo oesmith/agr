@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114225041) do
+ActiveRecord::Schema.define(version: 20170120174453) do
 
   create_table "feeds", force: :cascade do |t|
     t.string   "url"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20170114225041) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "feed_id"
+    t.text     "uid"
+    t.index ["uid", "feed_id", "user_id"], name: "index_posts_on_uid_and_feed_id_and_user_id", unique: true
   end
 
   create_table "scrapes", force: :cascade do |t|

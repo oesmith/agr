@@ -29,29 +29,37 @@ class ScrapeJob < ApplicationJob
 
     def scrape_atom(scrape, feed, rss)
       rss.entries.each do |entry|
-        Post.create(
+        post = Post.find_or_initialize_by(
           user: scrape.user,
-          scrape: scrape,
           feed: feed,
-          title: entry.title.content,
-          published_at: entry.published.content,
-          content: entry.content.content,
-          link: entry.link.href # TODO(olly): handle multiple links.
+          uid: entry.id.content
         )
+        post.title = entry.title.content
+        post.published_at = entry.published.content
+        post.content = entry.content.content
+        post.link = entry.link.href # TODO(olly): handle multiple links.
+        if post.changed?
+          post.scrape = scrape
+          post.save!
+        end
       end
     end
 
     def scrape_rss(scrape, feed, rss)
       rss.channel.items.each do |item|
-        Post.create(
+        post = Post.find_or_initialize_by(
           user: scrape.user,
-          scrape: scrape,
           feed: feed,
-          title: item.title,
-          published_at: item.pubDate,
-          content: item.content_encoded || item.description,
-          link: item.link
+          uid: item.guid.content
         )
+        post.title = item.title
+        post.published_at = item.pubDate
+        post.content = item.content_encoded || item.description
+        post.link = item.link
+        if post.changed?
+          post.scrape = scrape
+          post.save!
+        end
       end
     end
 end
