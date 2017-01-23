@@ -1,5 +1,5 @@
 <h1>News</h1>
-<p>Fetched <%= time_ago_in_words(@scrape.updated_at) %> ago (<%= @scrape.state %>)</p>
+<p>Fetched <%= time_ago_in_words(@scrape.updated_at) %> ago (<span class="news-state"><%= @scrape.state %></span>)</p>
 <%= link_to 'Manage feeds', feeds_path, class: 'button' %>
 <%= link_to 'Refresh', news_index_path, method: :post, class: 'button' %>
 <% unless @scrape.previous.nil? %>
@@ -27,8 +27,4 @@
       <%= sanitize_article(post.content) %>
     </article>
   <% end %>
-<% end %>
-
-<% if @scrape.state == 'pending' %>
-  <script>setTimeout(function() { Turbolinks.visit(location.toString()); }, 5000);</script>
 <% end %>

@@ -14,6 +14,13 @@ document.addEventListener('keypress', function(event) {
   }
 });
 
+document.addEventListener('turbolinks:load', function() {
+  let el = document.getElementsByClassName('news-state');
+  if (el.length > 0 && el[0].innerText == 'pending') {
+    setTimeout(function() { Turbolinks.visit(location.toString()); }, 2000);
+  }
+});
+
 function nextArticle() {
   var articles = getArticles();
   if (articles.length == 0) {
