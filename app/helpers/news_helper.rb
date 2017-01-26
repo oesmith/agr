@@ -10,7 +10,7 @@ module NewsHelper
   end
 
   class ArticleScrubber < Loofah::Scrubber
-    ALLOWED_TAGS = %w(figure a p b i em strong blockquote ul ol li dl df dd)
+    ALLOWED_TAGS = %w(figure a p b i em strong blockquote ul ol li dl df dd sup sub)
     ALLOWED_ATTRS = %w(href)
     KILL_TAGS = %w(script style img figure)
 
