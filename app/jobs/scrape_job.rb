@@ -35,7 +35,7 @@ class ScrapeJob < ApplicationJob
           uid: entry.id.content
         )
         post.title = entry.title.content
-        post.published_at = entry.published.content
+        post.published_at = (entry.published || entry.updated).content
         post.content = entry.content.content
         post.link = entry.link.href # TODO(olly): handle multiple links.
         if post.changed?
