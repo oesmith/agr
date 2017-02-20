@@ -31,7 +31,7 @@ class LinksController < ApplicationController
     end
     @link.user = current_user
     if @link.save
-      redirect_to @link, notice: 'Link was successfully created.'
+      redirect_to links_path, notice: 'Link was successfully created.'
     else
       render :new
     end
