@@ -12,18 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
     <%= f.label :url %>
-    <%= f.text_field :url %>
-  </div>
-
-  <div class="field">
-    <%= f.label :followed_at %>
-    <%= f.datetime_select :followed_at %>
+    <%= f.text_field :url, autofocus: true %>
   </div>
 
   <div class="actions">
