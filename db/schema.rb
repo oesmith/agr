@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220081537) do
+ActiveRecord::Schema.define(version: 20170312203523) do
 
   create_table "feeds", force: :cascade do |t|
     t.string   "url"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 0, null: false
     t.integer  "user_id"
   end
 
@@ -41,6 +42,14 @@ ActiveRecord::Schema.define(version: 20170220081537) do
     t.integer  "feed_id"
     t.text     "uid"
     t.index ["uid", "feed_id", "user_id"], name: "index_posts_on_uid_and_feed_id_and_user_id", unique: true
+  end
+
+  create_table "scrape_errors", force: :cascade do |t|
+    t.integer  "scrape_id"
+    t.integer  "feed_id"
+    t.text     "error_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "scrapes", force: :cascade do |t|

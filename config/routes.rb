@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :feeds
-  resources :news
+  resources :news do
+    member do
+      get 'errors'
+    end
+  end
   resources :trains
 
   root 'home#index'

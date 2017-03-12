@@ -15,4 +15,8 @@ class NewsController < ApplicationController
   def show
     @scrape = Scrape.find_by!(id: params[:id], user: current_user)
   end
+
+  def errors
+    @scrape = Scrape.find_by!(id: params[:id], user: current_user)
+  end
 end

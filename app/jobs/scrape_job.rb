@@ -7,6 +7,7 @@ class ScrapeJob < ApplicationJob
       begin
         scrape_feed(scrape, feed)
       rescue Exception => e
+        ScrapeError.create(feed: feed, scrape: scrape, error_text: e.to_s)
         logger.warn(e)
         scrape.state = 'errors'
       end

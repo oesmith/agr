@@ -1,6 +1,7 @@
 class Scrape < ApplicationRecord
   belongs_to :user
   has_many :posts
+  has_many :scrape_errors
   enum state: [:pending, :complete, :errors]
 
   def previous

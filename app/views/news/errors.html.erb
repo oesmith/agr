@@ -1,0 +1,16 @@
+<h1>Errors</h1>
+<p>Fetched <%= time_ago_in_words(@scrape.updated_at) %> ago</p>
+<%= link_to 'Back', news_path(@scrape.id), class: 'button' %>
+<%= link_to 'Manage feeds', feeds_path, class: 'button' %>
+<% unless @scrape.previous.nil? %>
+  <%= link_to 'Previous', news_path(@scrape.previous), class: 'button' %>
+<% end %>
+
+<ul>
+  <% @scrape.scrape_errors.each do |err| %>
+    <li>
+      <strong><%= err.feed.name %></strong>
+      <pre><%= err.error_text %></pre>
+    </li>
+  <% end %>
+</ul>

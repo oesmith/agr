@@ -1,5 +1,9 @@
 <h1>News</h1>
-<p>Fetched <%= time_ago_in_words(@scrape.updated_at) %> ago (<span class="news-state"><%= @scrape.state %></span>)</p>
+<p>
+  Fetched <%= time_ago_in_words(@scrape.updated_at) %> ago
+  (<span class="news-state"><%= @scrape.state %></span>)
+  <% if @scrape.state == 'errors' %><%= link_to "view", errors_news_path(id: @scrape.id) %><% end %>
+</p>
 <%= link_to 'Manage feeds', feeds_path, class: 'button' %>
 <%= link_to 'Refresh', news_index_path, method: :post, class: 'button' %>
 <% unless @scrape.previous.nil? %>
