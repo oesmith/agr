@@ -15,9 +15,8 @@ ActiveRecord::Schema.define(version: 20170312203523) do
   create_table "feeds", force: :cascade do |t|
     t.string   "url"
     t.string   "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "status",     default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
   end
 

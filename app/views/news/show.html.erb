@@ -20,12 +20,13 @@
 </div>
 
 <% unless @scrape.state == 'pending' %>
-  <% @scrape.posts.first(30).each do |post| %>
+  <% @scrape.posts.each_with_index do |post, index| %>
     <article>
-      <h2>
+      <h2 id="a<%= index + 1 %>">
         <%= post.title %>
       </h2>
-      <p>
+      <p class="post-subtitle">
+        <%= link_to "##{index + 1} / #{@scrape.posts.size}", "#a#{index + 1}" %> -
         <%= time_ago_in_words(post.published_at) %> ago - <%= link_to post.feed.name, post.link %>
       </p>
       <%= sanitize_article(post.content) %>
