@@ -25,6 +25,10 @@ module NewsHelper
         node.attribute_nodes.each do |attr|
           attr.remove unless ALLOWED_ATTRS.include?(attr.name)
         end
+        if node.name == "a"
+          # Open all links in a new tab
+          node['target'] = '_blank'
+        end
       elsif node.type == Nokogiri::XML::Node::ELEMENT_NODE
         node.before(node.children)
         node.remove

@@ -27,7 +27,7 @@
       </h2>
       <p class="post-subtitle">
         <%= link_to "##{index + 1} / #{@scrape.posts.size}", "#a#{index + 1}" %> -
-        <%= time_ago_in_words(post.published_at) %> ago - <%= link_to post.feed.name, post.link %>
+        <%= time_ago_in_words(post.published_at) %> ago - <%= link_to post.feed.name, post.link, target: "_blank" %>
       </p>
       <%= sanitize_article(post.content) %>
     </article>
