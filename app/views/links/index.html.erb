@@ -6,7 +6,7 @@
       <tr>
         <td>
           <%= link.title or "[[ Unknown title ]]" %><br>
-          <%= link_to link.url, link %>
+          <%= link_to link.url, link, data: { turbolinks: false } %>
         </td>
         <td><%= link_to 'Destroy', link, class: :button, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
