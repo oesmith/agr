@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class LinksControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:one)
+    sign_in @user
     @link = links(:one)
   end
 
@@ -16,26 +20,21 @@ class LinksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create link" do
-    assert_difference('Link.count') do
-      post links_url, params: { link: { followed_at: @link.followed_at, title: @link.title, url: @link.url } }
-    end
+    stub_request(:get, @link.url).to_return(status: 200, body: "<head><title>Foo bar</title></head>")
 
-    assert_redirected_to link_url(Link.last)
+    assert_difference('Link.count') do
+      post links_url, params: { link: { url: @link.url } }
+    end
+    assert_redirected_to links_url
+
+    assert_equal "Foo bar", Link.last.title
+    assert_nil Link.last.followed_at
   end
 
   test "should show link" do
     get link_url(@link)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_link_url(@link)
-    assert_response :success
-  end
-
-  test "should update link" do
-    patch link_url(@link), params: { link: { followed_at: @link.followed_at, title: @link.title, url: @link.url } }
-    assert_redirected_to link_url(@link)
+    assert_redirected_to @link.url
+    assert_not_nil @link.reload.followed_at
   end
 
   test "should destroy link" do
