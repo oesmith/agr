@@ -13,7 +13,7 @@ class LinksController < ApplicationController
 
   # GET /links/new
   def new
-    @link = Link.new
+    @link = Link.new(url: params.permit(:url)[:url])
   end
 
   # POST /links
