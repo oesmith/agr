@@ -1,3 +1,4 @@
+require 'net/http'
 require 'trains/transport_api/config'
 require 'trains/transport_api/departure'
 
