@@ -8,7 +8,12 @@ Rails.application.routes.draw do
       get 'errors'
     end
   end
+
   resources :trains
+
+  resources :streams
+  get 'auth/twitter/callback' => 'callback#twitter'
+  resources :twitter_streams
 
   root 'home#index'
 

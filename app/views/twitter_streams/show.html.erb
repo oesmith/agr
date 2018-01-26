@@ -1,0 +1,40 @@
+<div class="twitter-profile">
+  <div class="twitter-profile-image"
+    style="background-image: url(<%= @twitter_stream.profile.profile_image %>)">
+  </div>
+  <div class="twitter-profile-attributes">
+    <div class="twitter-profile-name">
+      <%= @twitter_stream.profile.real_name %>
+    </div>
+    <div class="twitter-profile-screen-name">
+      @<%= @twitter_stream.profile.screen_name %>
+    </div>
+  </div>
+</div>
+
+<% if !@twitter_stream.stream.mentions.nil? %>
+  <h3>Mentions</h3>
+
+  <ul class="twitter-timeline">
+    <% @twitter_stream.stream.mentions.each do |tweet| %>
+      <li class="twitter-post">
+        <%= render partial: "tweet", locals: { tweet: tweet } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if !@twitter_stream.stream.timeline.nil? %>
+  <h3>Timeline</h3>
+  
+  <ul class="twitter-timeline">
+    <% @twitter_stream.stream.timeline.each do |tweet| %>
+      <li class="twitter-post">
+        <%= render partial: "tweet", locals: { tweet: tweet } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<%= link_to 'Back', streams_path %>

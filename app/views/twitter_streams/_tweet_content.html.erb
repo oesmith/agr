@@ -1,0 +1,57 @@
+<div class="tweet-content">
+  <div class="tweet-author">
+    <span class="tweet-author-name">
+      <%= tweet.user.name %>
+    </span>
+    <span class="tweet-author-screen-name">
+      @<%= tweet.user.screen_name %>
+    </span>
+    <% if tweet.retweeted_status? %>
+      retweeted
+    <% end %>
+  </div>
+  <% if tweet.retweeted_status? %>
+    <div class="tweet-retweet">
+      <%= render partial: "tweet_content", locals: { tweet: tweet.retweeted_status } %>
+    </div>
+  <% else %>
+    <div class="tweet-body">
+      <%= replace_entities(tweet) %>
+    </div>
+    <% if tweet.quoted_status? %>
+      <div class="tweet-quote">
+        <%= render partial: "tweet_content", locals: { tweet: tweet.quoted_status } %>
+      </div>
+    <% end %>
+    <% if tweet.media? %>
+      <ul class="tweet-media">
+        <% tweet.media.each do |media| %>
+          <% if media.is_a? Twitter::Media::Photo %>
+            <li class="tweet-media-photo">
+              <img class="tweet-media-photo-img"
+                  src="<%= media.media_url_https %>">
+            </li>
+          <% elsif media.is_a? Twitter::Media::AnimatedGif %>
+            <li class="tweet-media-gif">
+              <video class="tweet-media-gif-video" controls loop
+                  poster="<%= media.media_url_https %>">
+                <% media.video_info.variants.each do |v| %>
+                  <source src="<%= v.url %>" type="<%= v[:type] %>"/>
+                <% end %>
+              </video>
+            </li>
+          <% elsif media.is_a? Twitter::Media::Video %>
+            <li class="tweet-media-video">
+              <video class="tweet-media-video-video" controls preload="none"
+                  poster="<%= media.media_url_https %>">
+                <% media.video_info.variants.each do |v| %>
+                  <source src="<%= v.url %>" type="<%= v[:type] %>"/>
+                <% end %>
+              </video>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>

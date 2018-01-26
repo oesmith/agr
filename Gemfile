@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'devise'
+gem 'htmlentities'
 gem 'nokogiri'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'twitter'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0'
