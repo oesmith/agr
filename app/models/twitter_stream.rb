@@ -12,8 +12,8 @@ class TwitterStream < Stream
   end
   
   def refresh
-    stream.timeline = client.home_timeline(count: 100)
-    stream.mentions = client.mentions_timeline(count: 5)
+    stream.timeline = client.home_timeline(count: 100, tweet_mode: :extended)
+    stream.mentions = client.mentions_timeline(count: 5, tweet_mode: :extended)
     self
   end
   
