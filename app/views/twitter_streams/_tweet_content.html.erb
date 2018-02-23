@@ -1,23 +1,20 @@
 <div class="tweet-content">
-  <div class="tweet-author">
-    <span class="tweet-author-name">
-      <%= tweet.user.name %>
-    </span>
+  <span class="tweet-author">
     <span class="tweet-author-screen-name">
       @<%= tweet.user.screen_name %>
     </span>
     <% if tweet.retweeted_status? %>
       retweeted
     <% end %>
-  </div>
+  </span>
   <% if tweet.retweeted_status? %>
     <div class="tweet-retweet">
       <%= render partial: "tweet_content", locals: { tweet: tweet.retweeted_status } %>
     </div>
   <% else %>
-    <div class="tweet-body">
+    <span class="tweet-body">
       <%= replace_entities(tweet) %>
-    </div>
+    </span>
     <% if tweet.quoted_status? %>
       <div class="tweet-quote">
         <%= render partial: "tweet_content", locals: { tweet: tweet.quoted_status } %>

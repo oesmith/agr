@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
   $('.tweet-data-show').click(function(evt) {
     var el = $(evt.target).closest('.tweet-data');
     el.removeClass('tweet-data-closed');

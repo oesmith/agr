@@ -21,16 +21,13 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  max-width: 40em;
 }
 
 .tweet {
-  margin: 1rem 0;
-  padding: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 16px 0;
 }
 
-.tweet-author-name {
+.tweet-author-screen-name {
   font-weight: bold;
 }
 
@@ -38,6 +35,7 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 .tweet-media-gif,
@@ -51,7 +49,8 @@
 .tweet-media-gif-video,
 .tweet-media-photo-img,
 .tweet-media-video-video {
-  max-width: 100%;
+  max-height: 600px;
+  max-width: 300px;
 }
 
 .tweet-data-closed .tweet-data-hide,
@@ -61,6 +60,7 @@
 
 .tweet-data-json {
   background-color: #FFF9C4;
+  max-height: 500px;
   overflow: auto;
 }
 
