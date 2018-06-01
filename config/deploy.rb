@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.9.0'
+lock '3.10.2'
 
 set :application, 'agr'
 set :repo_url, 'git@github.com:oesmith/agr.git'
