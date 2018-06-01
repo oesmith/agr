@@ -26,21 +26,21 @@
           <% if media.is_a? Twitter::Media::Photo %>
             <li class="tweet-media-photo">
               <img class="tweet-media-photo-img"
-                  src="<%= media.media_url_https %>">
+                  src="<%= proxy_image media.media_url_https %>">
             </li>
           <% elsif media.is_a? Twitter::Media::AnimatedGif %>
             <li class="tweet-media-gif">
               <video class="tweet-media-gif-video" controls loop
                   poster="<%= media.media_url_https %>">
                 <% media.video_info.variants.each do |v| %>
-                  <source src="<%= v.url %>" type="<%= v[:type] %>"/>
+                  <source src="<%= proxy_image v.url %>" type="<%= v[:type] %>"/>
                 <% end %>
               </video>
             </li>
           <% elsif media.is_a? Twitter::Media::Video %>
             <li class="tweet-media-video">
               <video class="tweet-media-video-video" controls preload="none"
-                  poster="<%= media.media_url_https %>">
+                  poster="<%= proxy_image media.media_url_https %>">
                 <% media.video_info.variants.each do |v| %>
                   <source src="<%= v.url %>" type="<%= v[:type] %>"/>
                 <% end %>
