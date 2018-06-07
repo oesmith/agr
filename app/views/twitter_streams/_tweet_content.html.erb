@@ -31,9 +31,9 @@
           <% elsif media.is_a? Twitter::Media::AnimatedGif %>
             <li class="tweet-media-gif">
               <video class="tweet-media-gif-video" controls loop
-                  poster="<%= media.media_url_https %>">
+                  poster="<%= proxy_image media.media_url_https %>">
                 <% media.video_info.variants.each do |v| %>
-                  <source src="<%= proxy_image v.url %>" type="<%= v[:type] %>"/>
+                  <source src="<%= v.url %>" type="<%= v[:type] %>"/>
                 <% end %>
               </video>
             </li>
