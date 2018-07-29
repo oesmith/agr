@@ -20,7 +20,7 @@ class StreamsControllerTest < ActionController::TestCase
 
   test "should destroy stream" do
     assert_difference('Stream.count', -1) do
-      delete :destroy, id: streams(:twitter_one)
+      delete :destroy, params: { id: streams(:twitter_one) }
     end
     assert_redirected_to streams_path
   end
@@ -29,7 +29,7 @@ class StreamsControllerTest < ActionController::TestCase
     s = streams(:twitter_two)
     assert_difference('Stream.count', 0) do
       assert_raises(ActiveRecord::RecordNotFound) do
-        delete :destroy, id: s
+        delete :destroy, params: { id: s }
       end
     end
   end

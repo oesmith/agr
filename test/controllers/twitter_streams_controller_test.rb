@@ -8,13 +8,13 @@ class TwitterStreamsControllerTest < ActionController::TestCase
   end
 
   test "should show twitter stream" do
-    get :show, id: streams(:twitter_one)
+    get :show, params: { id: streams(:twitter_one) }
     assert_response :success
   end
 
   test "should not show other user's twitter stream" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      get :show, id: streams(:twitter_two)
+      get :show, params: { id: streams(:twitter_two) }
     end
   end
 
