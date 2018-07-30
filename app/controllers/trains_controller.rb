@@ -8,8 +8,13 @@ class TrainsController < ApplicationController
 
   # GET /trains/1
   def show
-    @departures = Trains::TransportAPI.live_departures(@train.from)
-    @live = Trains::LDB.live_departures(@train.from, @train.to)
+    redirect_to("/train/#{@train.from}/#{@train.to}")
+  end
+
+  # GET /train/:from/:to
+  def view
+    @departures = Trains::TransportAPI.live_departures(params[:from])
+    @live = Trains::LDB.live_departures(params[:from], params[:to])
   end
 
   # GET /trains/new

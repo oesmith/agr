@@ -30,10 +30,15 @@ class TrainsControllerTest < ActionController::TestCase
   end
 
   test "should show train" do
+    get :show, params: { id: @train }
+    assert_redirected_to "/train/#{@train.from}/#{@train.to}"
+  end
+
+  test "should view departures for a given route" do
     # Stub out live departures calls, they're unit-tested elsewhere.
     Trains::LDB.stub(:live_departures, []) do
       Trains::TransportAPI.stub(:live_departures, []) do
-        get :show, params: { id: @train }
+        get :view, params: { from: 'CPM', to: 'PAD' }
         assert_response :success
       end
     end

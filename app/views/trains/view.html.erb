@@ -1,11 +1,11 @@
 <p>
   <strong>From:</strong>
-  <%= @train.from %>
+  <%= params[:from].upcase %>
 </p>
 
 <p>
   <strong>To:</strong>
-  <%= @train.to %>
+  <%= params[:to].upcase %>
 </p>
 
 <h3>Live Departures</h3>
@@ -52,5 +52,4 @@
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_train_path(@train), class: :button %>
-<%= link_to 'Back', trains_path, class: :button %>
+<%= link_to 'All trains', trains_path, class: :button %>
