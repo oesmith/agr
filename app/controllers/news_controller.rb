@@ -1,9 +1,7 @@
 class NewsController < ApplicationController
   def index
-    scrape = Scrape.where(user_id: current_user).order(updated_at: :desc).first
-    unless scrape.nil?
-      redirect_to(news_path(scrape))
-    end
+    @latest_scrape = Scrape.where(user_id: current_user).order(updated_at: :desc).first
+    @posts = Post.where(user: current_user).limit(50)
   end
 
   def create
