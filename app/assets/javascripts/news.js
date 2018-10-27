@@ -3,8 +3,6 @@
 
 (function() {
 
-$(document).on('click', '.post-prev', prevArticle);
-$(document).on('click', '.post-next', nextArticle);
 
 document.addEventListener('keypress', function(event) {
   if (event.charCode == 106 /* J */) {
@@ -19,6 +17,8 @@ document.addEventListener('turbolinks:load', function() {
   if (el.length > 0 && el[0].innerText == 'pending') {
     setTimeout(function() { Turbolinks.visit(location.toString()); }, 2000);
   }
+  $('.post-prev').click(prevArticle);
+  $('.post-next').click(nextArticle);
 });
 
 function nextArticle() {
