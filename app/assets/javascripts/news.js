@@ -13,12 +13,18 @@ document.addEventListener('keypress', function(event) {
 });
 
 document.addEventListener('turbolinks:load', function() {
-  var el = document.getElementsByClassName('news-state');
+  const el = document.getElementsByClassName('news-state');
   if (el.length > 0 && el[0].innerText == 'pending') {
     setTimeout(function() { Turbolinks.visit(location.toString()); }, 2000);
   }
-  $('.post-prev').click(prevArticle);
-  $('.post-next').click(nextArticle);
+  const postPrevEls = document.getElementsByClassName('post-prev');
+  for (let i = 0; i < postPrevEls.length; i++) {
+    postPrevEls[i].addEventListener('click', prevArticle);
+  }
+  const postNextEls = document.getElementsByClassName('post-next');
+  for (let i = 0; i < postNextEls.length; i++) {
+    postNextEls[i].addEventListener('click', nextArticle);
+  }
 });
 
 function nextArticle() {
