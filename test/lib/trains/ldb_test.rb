@@ -4,7 +4,7 @@ class Trains::LDBTest < ActiveSupport::TestCase
   API_KEY = "my_api_key"
   NS_SOAP = "http://schemas.xmlsoap.org/soap/envelope/"
   NS_TYPE = "http://thalesgroup.com/RTTI/2013-11-28/Token/types"
-  NS_LDB = "http://thalesgroup.com/RTTI/2014-02-20/ldb/"
+  NS_LDB = "http://thalesgroup.com/RTTI/2017-10-01/ldb/"
 
   setup do
     Trains::LDB.setup do |config|
