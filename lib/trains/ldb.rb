@@ -6,7 +6,7 @@ module Trains
   module LDB
     ACTION = "http://thalesgroup.com/RTTI/2012-01-13/ldb/GetDepartureBoard"
     API_URI =
-      URI("https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx")
+      URI("https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb11.asmx")
 
     @@config = Config.new
 
@@ -23,7 +23,7 @@ module Trains
       req.body = <<END
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
     xmlns:t="http://thalesgroup.com/RTTI/2013-11-28/Token/types"
-    xmlns:l="http://thalesgroup.com/RTTI/2014-02-20/ldb/">
+    xmlns:l="http://thalesgroup.com/RTTI/2017-10-01/ldb/">
   <soap:Header>
     <t:AccessToken>
       <t:TokenValue>#{config.api_key}</t:TokenValue>
