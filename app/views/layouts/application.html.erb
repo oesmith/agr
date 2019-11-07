@@ -12,11 +12,15 @@
 <header class="header">
   <div class="header-content">
     <nav>
-      <%= link_to("Trains", trains_path, class: "nav-item") %> ::
-      <%= link_to("News", news_index_path, class: "nav-item") %> ::
-      <%= link_to("Streams", streams_path, class: "nav-item") %> ::
-      <%= link_to("Links", links_path, class: "nav-item") %> ::
-      <%= link_to("Sign out", destroy_user_session_path, method: :delete, class: "nav-item") %>
+      <%= link_to("Trains", trains_path, class: "nav-item") %>
+      <span class="nav-sep">::</span>
+      <%= link_to("News", news_index_path, class: "nav-item") %>
+      <span class="nav-sep">::</span>
+      <%= link_to("Social", streams_path, class: "nav-item") %>
+      <span class="nav-sep">::</span>
+      <%= link_to("Links", links_path, class: "nav-item") %>
+      <span class="nav-sep">::</span>
+      <%= link_to("Logout", destroy_user_session_path, method: :delete, class: "nav-item") %>
     </nav>
   </div>
 </header>
