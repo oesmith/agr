@@ -1,11 +1,11 @@
 <h1>Listing Streams</h1>
 
-<table>
+<table class="feeds">
   <thead>
     <tr>
       <th>Type</th>
       <th>Name</th>
-      <th colspan="2"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -14,8 +14,10 @@
       <tr>
         <td><%= stream.type_name %></td>
         <td><%= stream.printable_name %></td>
-        <td><%= link_to 'Show', stream %></td>
-        <td><%= link_to 'Destroy', stream_path(stream), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Show', stream, class: :button %>
+          <%= link_to 'Destroy', stream_path(stream), method: :delete, data: { confirm: 'Are you sure?' }, class: :button %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -23,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Stream', new_stream_path %>
+<%= link_to 'New Stream', new_stream_path, class: :button %>

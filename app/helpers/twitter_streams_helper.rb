@@ -1,9 +1,10 @@
 module TwitterStreamsHelper
   def replace_entities(tweet)
-    if tweet.urls?
+    if (tweet.urls? || tweet.media?)
+      urls = (tweet.urls + tweet.media).sort_by { |u| u.indices.first }
       t = ActiveSupport::SafeBuffer.new
       i = 0
-      tweet.urls.each do |url|
+      urls.each do |url|
         t << entities.decode(tweet.attrs[:full_text][i...url.indices.first])
         t << link_to(url.display_url, url.expanded_url.to_s, target: '_blank')
         i = url.indices.second
