@@ -12,7 +12,6 @@ module Trains
 
     def self.setup(&block)
       block.call(config)
-      config.validate!
     end
 
     def self.live_departures(from, to, limit = 20)
