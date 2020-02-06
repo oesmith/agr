@@ -3,11 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :feeds
-  resources :news do
-    member do
-      get 'errors'
-    end
-  end
+  resources :news
 
   resources :trains
   get 'train/:from/:to' => 'trains#view'

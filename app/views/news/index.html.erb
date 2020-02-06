@@ -1,8 +1,7 @@
 <h1>News</h1>
 <p>
-  Fetched <%= time_ago_in_words(@latest_scrape.updated_at) %> ago
-  (<%= link_to 'details', news_path(@latest_scrape) %>)
+  Most recent update <%= time_ago_in_words(@feeds.map(&:updated_at).max) %> ago
 </p>
 <%= link_to 'Manage feeds', feeds_path, class: 'button' %>
 
-<%= render partial: 'posts', object: @posts %>
+<%= render partial: 'posts', object: @articles %>

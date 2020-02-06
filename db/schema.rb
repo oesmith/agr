@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_26_100100) do
+ActiveRecord::Schema.define(version: 2020_02_06_111329) do
 
   create_table "feeds", force: :cascade do |t|
     t.string "url"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2018_01_26_100100) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
     t.integer "user_id"
+    t.binary "articles_json"
+    t.text "error_text"
   end
 
   create_table "links", force: :cascade do |t|
@@ -26,35 +28,6 @@ ActiveRecord::Schema.define(version: 2018_01_26_100100) do
     t.string "url"
     t.datetime "followed_at"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "scrape_id"
-    t.datetime "published_at"
-    t.string "title"
-    t.string "content"
-    t.string "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "feed_id"
-    t.text "uid"
-    t.index ["uid", "feed_id", "user_id"], name: "index_posts_on_uid_and_feed_id_and_user_id", unique: true
-  end
-
-  create_table "scrape_errors", force: :cascade do |t|
-    t.integer "scrape_id"
-    t.integer "feed_id"
-    t.text "error_text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "scrapes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
