@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class LinksControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
@@ -22,7 +22,7 @@ class LinksControllerTest < ActionDispatch::IntegrationTest
   test "should create link" do
     stub_request(:get, @link.url).to_return(status: 200, body: "<head><title>Foo bar</title></head>")
 
-    assert_difference('Link.count') do
+    assert_difference("Link.count") do
       post links_url, params: { link: { url: @link.url } }
     end
     assert_redirected_to links_url
@@ -38,7 +38,7 @@ class LinksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy link" do
-    assert_difference('Link.count', -1) do
+    assert_difference("Link.count", -1) do
       delete link_url(@link)
     end
 

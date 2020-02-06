@@ -10,13 +10,13 @@ class TwitterStream < Stream
   def printable_name
     "@#{profile.screen_name}"
   end
-  
+
   def refresh
     stream.timeline = client.home_timeline(count: 100, tweet_mode: :extended)
     stream.mentions = client.mentions_timeline(count: 5, tweet_mode: :extended)
     self
   end
-  
+
   def client
     @client ||= Twitter::REST::Client.new do |c|
       c.consumer_key = ENV["TWITTER_KEY"]

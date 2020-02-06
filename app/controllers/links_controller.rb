@@ -21,17 +21,17 @@ class LinksController < ApplicationController
     begin
       data = Net::HTTP.get(URI(link_params[:url]))
     rescue
-      render :new, notice: 'Failed to fetch link'
+      render :new, notice: "Failed to fetch link"
     end
     @link = Link.new(link_params)
     begin
-      @link.title = Nokogiri.HTML(data).css('title').first.content
+      @link.title = Nokogiri.HTML(data).css("title").first.content
     rescue
       # noop
     end
     @link.user = current_user
     if @link.save
-      redirect_to links_path, notice: 'Link was successfully created.'
+      redirect_to links_path, notice: "Link was successfully created."
     else
       render :new
     end
@@ -40,17 +40,18 @@ class LinksController < ApplicationController
   # DELETE /links/1
   def destroy
     @link.destroy
-    redirect_to links_url, notice: 'Link was successfully destroyed.'
+    redirect_to links_url, notice: "Link was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_link
-      @link = Link.find_by!(id: params[:id], user: current_user)
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def link_params
-      params.require(:link).permit(:url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_link
+    @link = Link.find_by!(id: params[:id], user: current_user)
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def link_params
+    params.require(:link).permit(:url)
+  end
 end

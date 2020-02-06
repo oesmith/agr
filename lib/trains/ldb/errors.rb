@@ -14,4 +14,3 @@ module Trains
     end
   end
 end
-

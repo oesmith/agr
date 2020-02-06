@@ -8,6 +8,6 @@ class StreamsController < ApplicationController
 
   def destroy
     Stream.find_by!(id: params[:id], user: current_user).destroy
-    redirect_to streams_url, notice: 'Stream was successfully destroyed.'
+    redirect_to streams_url, notice: "Stream was successfully destroyed."
   end
 end

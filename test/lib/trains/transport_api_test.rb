@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class Trains::TransportAPITest < ActiveSupport::TestCase
   API_KEY = "my_api_key"
@@ -63,7 +63,7 @@ END
     end
   end
 
-  test 'should not allow nil app ID or API key values' do
+  test "should not allow nil app ID or API key values" do
     assert_raises do
       Trains::TransportAPI.setup do |config|
         config.api_key = nil
@@ -72,20 +72,20 @@ END
     end
   end
 
-  test 'should fetch live departures' do
+  test "should fetch live departures" do
     # TODO(ollysmith): actually parse and validate the response JSON
     stub_request(:get, URL)
-        .with(query: { api_key: API_KEY, app_id: APP_ID })
-        .to_return(body: RESPONSE)
+      .with(query: { api_key: API_KEY, app_id: APP_ID })
+      .to_return(body: RESPONSE)
     departures = Trains::TransportAPI.live_departures(STATION)
     assert_equal(DEPARTURES, departures)
   end
 
-  test 'should upper-case station names' do
+  test "should upper-case station names" do
     # Stub for URL containing upper-case station name.
     stub_request(:get, URL)
-        .with(query: { api_key: API_KEY, app_id: APP_ID })
-        .to_return(body: "{}")
+      .with(query: { api_key: API_KEY, app_id: APP_ID })
+      .to_return(body: "{}")
     Trains::TransportAPI.live_departures(STATION.downcase)
   end
 end

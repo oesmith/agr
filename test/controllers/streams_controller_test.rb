@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class StreamsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
@@ -19,7 +19,7 @@ class StreamsControllerTest < ActionController::TestCase
   end
 
   test "should destroy stream" do
-    assert_difference('Stream.count', -1) do
+    assert_difference("Stream.count", -1) do
       delete :destroy, params: { id: streams(:twitter_one) }
     end
     assert_redirected_to streams_path
@@ -27,7 +27,7 @@ class StreamsControllerTest < ActionController::TestCase
 
   test "should not destroy other user's stream" do
     s = streams(:twitter_two)
-    assert_difference('Stream.count', 0) do
+    assert_difference("Stream.count", 0) do
       assert_raises(ActiveRecord::RecordNotFound) do
         delete :destroy, params: { id: s }
       end

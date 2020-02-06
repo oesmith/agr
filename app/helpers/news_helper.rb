@@ -27,7 +27,7 @@ module NewsHelper
         end
         if node.name == "a"
           # Open all links in a new tab
-          node['target'] = '_blank'
+          node["target"] = "_blank"
         end
       elsif node.type == Nokogiri::XML::Node::ELEMENT_NODE
         node.before(node.children)

@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class FeedTest < ActiveSupport::TestCase
   ATOM_DOC = <<END
@@ -33,33 +33,33 @@ END
 END
 
   setup do
-    stub_request(:get, 'http://agr.test/atom').to_return(body: ATOM_DOC)
-    stub_request(:get, 'http://agr.test/rss').to_return(body: RSS_DOC)
-    stub_request(:get, 'http://agr.test/alternate').to_return(body: ALTERNATE_DOC, headers: { 'Content-Type' => 'text/html' })
-    stub_request(:get, 'http://agr.test/redirect').to_return(status: 302, headers: { Location: 'http://agr.test/rss' })
+    stub_request(:get, "http://agr.test/atom").to_return(body: ATOM_DOC)
+    stub_request(:get, "http://agr.test/rss").to_return(body: RSS_DOC)
+    stub_request(:get, "http://agr.test/alternate").to_return(body: ALTERNATE_DOC, headers: { "Content-Type" => "text/html" })
+    stub_request(:get, "http://agr.test/redirect").to_return(status: 302, headers: { Location: "http://agr.test/rss" })
   end
 
   test "resolves atom 1.0 feeds" do
-    feed = Feed.resolve(URI('http://agr.test/atom'))
-    assert_equal('http://agr.test/atom', feed.url)
-    assert_equal('Atom Feed Title', feed.name)
+    feed = Feed.resolve(URI("http://agr.test/atom"))
+    assert_equal("http://agr.test/atom", feed.url)
+    assert_equal("Atom Feed Title", feed.name)
   end
 
   test "resolves rss feeds" do
-    feed = Feed.resolve(URI('http://agr.test/rss'))
-    assert_equal('http://agr.test/rss', feed.url)
-    assert_equal('RSS Feed Title', feed.name)
+    feed = Feed.resolve(URI("http://agr.test/rss"))
+    assert_equal("http://agr.test/rss", feed.url)
+    assert_equal("RSS Feed Title", feed.name)
   end
 
   test "follows redirects" do
-    feed = Feed.resolve(URI('http://agr.test/redirect'))
-    assert_equal('http://agr.test/rss', feed.url)
-    assert_equal('RSS Feed Title', feed.name)
+    feed = Feed.resolve(URI("http://agr.test/redirect"))
+    assert_equal("http://agr.test/rss", feed.url)
+    assert_equal("RSS Feed Title", feed.name)
   end
 
   test "follows alternate links" do
-    feed = Feed.resolve(URI('http://agr.test/alternate'))
-    assert_equal('http://agr.test/rss', feed.url)
-    assert_equal('RSS Feed Title', feed.name)
+    feed = Feed.resolve(URI("http://agr.test/alternate"))
+    assert_equal("http://agr.test/rss", feed.url)
+    assert_equal("RSS Feed Title", feed.name)
   end
 end

@@ -1,4 +1,3 @@
-
 class NewsController < ApplicationController
   def index
     @feeds = Feed.where(user_id: current_user)
@@ -32,7 +31,8 @@ class NewsController < ApplicationController
         published_at: (entry.published || entry.updated).content,
         title: entry.title.content,
         content: entry.content.content,
-        link: entry.link.href)
+        link: entry.link.href,
+      )
     end
   end
 
@@ -43,7 +43,8 @@ class NewsController < ApplicationController
         published_at: item.pubDate,
         title: item.title,
         content: item.content_encoded || item.description,
-        link: item.link)
+        link: item.link,
+      )
     end
   end
 end

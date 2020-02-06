@@ -33,7 +33,7 @@ class FeedsController < ApplicationController
     end
 
     if @feed.save
-      redirect_to @feed, notice: 'Feed was successfully created.'
+      redirect_to @feed, notice: "Feed was successfully created."
     else
       render :new
     end
@@ -42,7 +42,7 @@ class FeedsController < ApplicationController
   # PATCH/PUT /feeds/1
   def update
     if @feed.update(feed_params)
-      redirect_to @feed, notice: 'Feed was successfully updated.'
+      redirect_to @feed, notice: "Feed was successfully updated."
     else
       render :edit
     end
@@ -51,17 +51,18 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1
   def destroy
     @feed.destroy
-    redirect_to feeds_url, notice: 'Feed was successfully destroyed.'
+    redirect_to feeds_url, notice: "Feed was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feed
-      @feed = Feed.find_by!(id: params[:id], user: current_user)
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def feed_params
-      params.require(:feed).permit(:url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_feed
+    @feed = Feed.find_by!(id: params[:id], user: current_user)
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def feed_params
+    params.require(:feed).permit(:url)
+  end
 end

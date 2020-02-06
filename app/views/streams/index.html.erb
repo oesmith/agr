@@ -15,8 +15,8 @@
         <td><%= stream.type_name %></td>
         <td><%= stream.printable_name %></td>
         <td>
-          <%= link_to 'Show', stream, class: :button %>
-          <%= link_to 'Destroy', stream_path(stream), method: :delete, data: { confirm: 'Are you sure?' }, class: :button %>
+          <%= link_to "Show", stream, class: :button %>
+          <%= link_to "Destroy", stream_path(stream), method: :delete, data: { confirm: "Are you sure?" }, class: :button %>
         </td>
       </tr>
     <% end %>
@@ -25,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Stream', new_stream_path, class: :button %>
+<%= link_to "New Stream", new_stream_path, class: :button %>

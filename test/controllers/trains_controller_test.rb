@@ -1,5 +1,5 @@
-require 'test_helper'
-require 'minitest/mock'
+require "test_helper"
+require "minitest/mock"
 
 class TrainsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
@@ -22,7 +22,7 @@ class TrainsControllerTest < ActionController::TestCase
   end
 
   test "should create train" do
-    assert_difference('Train.count') do
+    assert_difference("Train.count") do
       post :create, params: { train: { from: @train.from, to: @train.to } }
     end
     assert_equal @user, assigns(:train).user
@@ -38,7 +38,7 @@ class TrainsControllerTest < ActionController::TestCase
     # Stub out live departures calls, they're unit-tested elsewhere.
     Trains::LDB.stub(:live_departures, []) do
       Trains::TransportAPI.stub(:live_departures, []) do
-        get :view, params: { from: 'CPM', to: 'PAD' }
+        get :view, params: { from: "CPM", to: "PAD" }
         assert_response :success
       end
     end
@@ -55,7 +55,7 @@ class TrainsControllerTest < ActionController::TestCase
   end
 
   test "should destroy train" do
-    assert_difference('Train.count', -1) do
+    assert_difference("Train.count", -1) do
       delete :destroy, params: { id: @train }
     end
     assert_redirected_to trains_path
@@ -81,7 +81,7 @@ class TrainsControllerTest < ActionController::TestCase
 
   test "should not destroy other user's train" do
     t = trains(:three)
-    assert_difference('Train.count', 0) do
+    assert_difference("Train.count", 0) do
       assert_raises(ActiveRecord::RecordNotFound) do
         delete :destroy, params: { id: t }
       end

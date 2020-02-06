@@ -1,6 +1,6 @@
-require 'net/http'
-require 'trains/transport_api/config'
-require 'trains/transport_api/departure'
+require "net/http"
+require "trains/transport_api/config"
+require "trains/transport_api/departure"
 
 module Trains
   module TransportAPI
@@ -15,13 +15,16 @@ module Trains
         Net::HTTP.get(
           URI(
             "https://transportapi.com/v3/uk/train/station/#{station.upcase}/" +
-            "live.json?app_id=#{config.app_id}&api_key=#{config.api_key}")))
+            "live.json?app_id=#{config.app_id}&api_key=#{config.api_key}"
+          )
+        )
+      )
 
       if response.is_a?(Hash) &&
-        response.has_key?("departures") &&
-        response["departures"].is_a?(Hash) &&
-        response["departures"].has_key?("all") &&
-        response["departures"]["all"].is_a?(Array)
+         response.has_key?("departures") &&
+         response["departures"].is_a?(Hash) &&
+         response["departures"].has_key?("all") &&
+         response["departures"]["all"].is_a?(Array)
         response["departures"]["all"].map do |d|
           Departure.new(
             platform: d["platform"],

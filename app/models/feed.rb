@@ -1,13 +1,14 @@
-require 'rss'
-require 'json'
+require "rss"
+require "json"
 
 class Feed < ActiveRecord::Base
   belongs_to :user
 
-  ALTERNATE_TYPES = ['application/atom+xml', 'application/rss+xml']
+  ALTERNATE_TYPES = ["application/atom+xml", "application/rss+xml"]
 
   Article = Struct.new(
-    :feed, :published_at, :title, :content, :link, keyword_init: true)
+    :feed, :published_at, :title, :content, :link, keyword_init: true,
+  )
 
   def refresh
     begin
@@ -34,16 +35,16 @@ class Feed < ActiveRecord::Base
   def articles
     return nil if articles_json.nil?
     JSON.parse(articles_json).map do |article_hash|
-      Article.new(article_hash.merge({feed: self}))
+      Article.new(article_hash.merge({ feed: self }))
     end
   end
 
-  def self.resolve(url, redirects=10)
-    raise ArgumentError, 'Too many redirects' if redirects == 0
+  def self.resolve(url, redirects = 10)
+    raise ArgumentError, "Too many redirects" if redirects == 0
     url = URI("http://#{url.to_s}") if url.scheme.nil?
     res = Net::HTTP.get_response(url)
     case res
-    when Net::HTTPSuccess then
+    when Net::HTTPSuccess
       begin
         rss = RSS::Parser.parse(res.body)
       rescue
@@ -52,10 +53,10 @@ class Feed < ActiveRecord::Base
         # Attempt to find a link[rel=alternate] in the page.
         html = Nokogiri::HTML(res.body)
         alternate = html.css('link[rel="alternate"]').find do |e|
-          e.attributes['type'] and ALTERNATE_TYPES.include? e.attributes['type'].value
+          e.attributes["type"] and ALTERNATE_TYPES.include? e.attributes["type"].value
         end
         raise "Unable to find a feed at #{url.to_s}" if alternate.nil?
-        resolve(URI.join(url, alternate.attributes['href'].value), redirects - 1)
+        resolve(URI.join(url, alternate.attributes["href"].value), redirects - 1)
       else
         case "#{rss.feed_type}/#{rss.feed_version}"
         when "atom/1.0"
@@ -66,9 +67,9 @@ class Feed < ActiveRecord::Base
           raise "Unsupported feed type #{rss.feed_type}/#{rss.feed_version}"
         end
       end
-    when Net::HTTPRedirection then
+    when Net::HTTPRedirection
       # Follow redirects.
-      resolve(URI.join(url, res['location']), redirects - 1)
+      resolve(URI.join(url, res["location"]), redirects - 1)
     else
       raise "HTTP fetch error (#{res.code})"
     end
@@ -82,7 +83,7 @@ class Feed < ActiveRecord::Base
       when "atom/1.0" then parse_atom(rss)
       when "rss/2.0" then parse_rss(rss)
       else []
-    end
+      end
     self.articles_json = articles.to_json
     self.error_text = nil
   end
@@ -118,5 +119,4 @@ class Feed < ActiveRecord::Base
   def redirected(url)
     self.url = url
   end
-
 end

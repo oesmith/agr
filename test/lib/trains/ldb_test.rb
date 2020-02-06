@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class Trains::LDBTest < ActiveSupport::TestCase
   API_KEY = "my_api_key"
@@ -12,7 +12,7 @@ class Trains::LDBTest < ActiveSupport::TestCase
     end
   end
 
-  test 'should not allow nil app ID or API key values' do
+  test "should not allow nil app ID or API key values" do
     assert_raises do
       Trains::LDB.setup do |config|
         config.api_key = nil
@@ -20,17 +20,17 @@ class Trains::LDBTest < ActiveSupport::TestCase
     end
   end
 
-  test 'should set auth token' do
+  test "should set auth token" do
     stub_request(:post, Trains::LDB::API_URI).with do |req|
       api_key = Nokogiri::XML(req.body)
-          .xpath('.//s:Envelope/s:Header/t:AccessToken/t:TokenValue', s:NS_SOAP, t: NS_TYPE)
-          .text
+        .xpath(".//s:Envelope/s:Header/t:AccessToken/t:TokenValue", s: NS_SOAP, t: NS_TYPE)
+        .text
       API_KEY == api_key
     end
     Trains::LDB.live_departures("src", "dst")
   end
 
-  test 'should set request parameters' do
+  test "should set request parameters" do
     stub_request(:post, Trains::LDB::API_URI).with do |req|
       doc = Nokogiri::XML(req.body)
       src = doc.xpath(".//s:Envelope/s:Body/l:GetDepartureBoardRequest/l:crs", s: NS_SOAP, l: NS_LDB).text
@@ -41,13 +41,13 @@ class Trains::LDBTest < ActiveSupport::TestCase
     Trains::LDB.live_departures("src", "dst", 7)
   end
 
-  test 'should set soap action header' do
+  test "should set soap action header" do
     stub_request(:post, Trains::LDB::API_URI)
-        .with(headers: { "SOAPAction" => Trains::LDB::ACTION })
+      .with(headers: { "SOAPAction" => Trains::LDB::ACTION })
     Trains::LDB.live_departures("src", "dst")
   end
 
-  test 'should parse responses' do
+  test "should parse responses" do
     res_body = <<END
 <?xml version="1.0" encoding="UTF-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

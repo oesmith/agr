@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class TwitterProfileTest < ActiveSupport::TestCase
   test "should initialize from omniauth hash" do
@@ -7,7 +7,7 @@ class TwitterProfileTest < ActiveSupport::TestCase
         nickname: "philz",
         name: "Phil McPhil",
         image: "http://example.com/philz.png",
-      }
+      },
     })
     assert_equal("philz", obj.screen_name)
     assert_equal("Phil McPhil", obj.real_name)

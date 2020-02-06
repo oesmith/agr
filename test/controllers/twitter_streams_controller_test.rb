@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class TwitterStreamsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
@@ -17,5 +17,4 @@ class TwitterStreamsControllerTest < ActionController::TestCase
       get :show, params: { id: streams(:twitter_two) }
     end
   end
-
 end

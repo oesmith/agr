@@ -2,6 +2,6 @@
 <p>
   Most recent update <%= time_ago_in_words(@feeds.map(&:updated_at).max) %> ago
 </p>
-<%= link_to 'Manage feeds', feeds_path, class: 'button' %>
+<%= link_to "Manage feeds", feeds_path, class: "button" %>
 
-<%= render partial: 'posts', object: @articles %>
+<%= render partial: "posts", object: @articles %>

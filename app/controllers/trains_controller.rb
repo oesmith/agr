@@ -31,7 +31,7 @@ class TrainsController < ApplicationController
     @train = Train.new(train_params.merge(user: current_user))
 
     if @train.save
-      redirect_to @train, notice: 'Train was successfully created.'
+      redirect_to @train, notice: "Train was successfully created."
     else
       render :new
     end
@@ -40,7 +40,7 @@ class TrainsController < ApplicationController
   # PATCH/PUT /trains/1
   def update
     if @train.update(train_params)
-      redirect_to @train, notice: 'Train was successfully updated.'
+      redirect_to @train, notice: "Train was successfully updated."
     else
       render :edit
     end
@@ -49,17 +49,18 @@ class TrainsController < ApplicationController
   # DELETE /trains/1
   def destroy
     @train.destroy
-    redirect_to trains_url, notice: 'Train was successfully destroyed.'
+    redirect_to trains_url, notice: "Train was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_train
-      @train = Train.find_by!(id: params[:id], user: current_user)
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def train_params
-      params.require(:train).permit(:from, :to)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_train
+    @train = Train.find_by!(id: params[:id], user: current_user)
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def train_params
+    params.require(:train).permit(:from, :to)
+  end
 end

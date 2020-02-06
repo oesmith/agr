@@ -15,9 +15,9 @@
         <td><%= train.from %></td>
         <td><%= train.to %></td>
         <td>
-          <%= link_to 'Show', train, class: :button %>
-          <%= link_to 'Edit', edit_train_path(train), class: :button %>
-          <%= link_to 'Destroy', train, method: :delete, data: { confirm: 'Are you sure?' }, class: :button %>
+          <%= link_to "Show", train, class: :button %>
+          <%= link_to "Edit", edit_train_path(train), class: :button %>
+          <%= link_to "Destroy", train, method: :delete, data: { confirm: "Are you sure?" }, class: :button %>
         </td>
       </tr>
     <% end %>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Train', new_train_path, class: :button %>
+<%= link_to "New Train", new_train_path, class: :button %>

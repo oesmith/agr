@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class TwitterConfigTest < ActiveSupport::TestCase
   test "should initialize from omniauth hash" do
@@ -6,7 +6,7 @@ class TwitterConfigTest < ActiveSupport::TestCase
       credentials: {
         token: "tok",
         secret: "sec",
-       }
+      },
     })
     assert_equal("tok", obj.oauth_token)
     assert_equal("sec", obj.oauth_secret)

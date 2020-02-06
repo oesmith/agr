@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class FeedsControllerTest < ActionController::TestCase
   include ActiveJob::TestHelper
@@ -33,10 +33,10 @@ END
   end
 
   test "should create feed" do
-    stub_request(:get, 'http://agr.test/rss').to_return(body: RSS_DOC)
+    stub_request(:get, "http://agr.test/rss").to_return(body: RSS_DOC)
 
-    assert_difference('Feed.count') do
-      post :create, params: { feed: { url: 'http://agr.test/rss' } }
+    assert_difference("Feed.count") do
+      post :create, params: { feed: { url: "http://agr.test/rss" } }
     end
 
     assert_redirected_to feed_path(assigns(:feed))
@@ -58,7 +58,7 @@ END
   end
 
   test "should destroy feed" do
-    assert_difference('Feed.count', -1) do
+    assert_difference("Feed.count", -1) do
       delete :destroy, params: { id: @feed }
     end
 

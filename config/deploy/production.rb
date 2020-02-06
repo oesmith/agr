@@ -3,9 +3,7 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server 'olly.xyz', user: 'agr', roles: %w{app web db}
-
-
+server "olly.xyz", user: "agr", roles: %w{app web db}
 
 # Configuration
 # =============
@@ -14,8 +12,6 @@ server 'olly.xyz', user: 'agr', roles: %w{app web db}
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
-
 
 # Custom SSH Options
 # ==================
@@ -45,5 +41,5 @@ server 'olly.xyz', user: 'agr', roles: %w{app web db}
 #   }
 
 set :ssh_options, {
-  forward_agent: true
+  forward_agent: true,
 }

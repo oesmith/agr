@@ -1,6 +1,6 @@
-require 'trains/ldb/config'
-require 'trains/ldb/errors'
-require 'trains/ldb/service'
+require "trains/ldb/config"
+require "trains/ldb/errors"
+require "trains/ldb/service"
 
 module Trains
   module LDB
@@ -51,7 +51,8 @@ END
           destination_name: service.xpath(".//destination/location/locationName").text,
           scheduled_time: service.xpath(".//std").text,
           estimated_time: service.xpath(".//etd").text,
-          platform: service.xpath(".//platform").text)
+          platform: service.xpath(".//platform").text,
+        )
       end
     end
 

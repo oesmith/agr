@@ -6,13 +6,13 @@ Rails.application.routes.draw do
   resources :news
 
   resources :trains
-  get 'train/:from/:to' => 'trains#view'
+  get "train/:from/:to" => "trains#view"
 
   resources :streams
-  get 'auth/twitter/callback' => 'callback#twitter'
+  get "auth/twitter/callback" => "callback#twitter"
   resources :twitter_streams
 
-  root 'home#index'
+  root "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

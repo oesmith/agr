@@ -1,5 +1,5 @@
 <h1>Links</h1>
-<%= link_to 'New Link', new_link_path, class: :button %>
+<%= link_to "New Link", new_link_path, class: :button %>
 <table>
   <tbody>
     <% @links.each do |link| %>
@@ -8,7 +8,7 @@
           <%= link.title or "[[ Unknown title ]]" %><br>
           <%= link_to link.url, link, data: { turbolinks: false } %>
         </td>
-        <td><%= link_to 'Destroy', link, class: :button, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "Destroy", link, class: :button, method: :delete, data: { confirm: "Are you sure?" } %></td>
       </tr>
     <% end %>
   </tbody>
