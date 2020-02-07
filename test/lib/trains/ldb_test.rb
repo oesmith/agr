@@ -12,14 +12,6 @@ class Trains::LDBTest < ActiveSupport::TestCase
     end
   end
 
-  test "should not allow nil app ID or API key values" do
-    assert_raises do
-      Trains::LDB.setup do |config|
-        config.api_key = nil
-      end
-    end
-  end
-
   test "should set auth token" do
     stub_request(:post, Trains::LDB::API_URI).with do |req|
       api_key = Nokogiri::XML(req.body)

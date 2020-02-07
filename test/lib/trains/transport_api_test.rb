@@ -63,15 +63,6 @@ END
     end
   end
 
-  test "should not allow nil app ID or API key values" do
-    assert_raises do
-      Trains::TransportAPI.setup do |config|
-        config.api_key = nil
-        config.app_id = nil
-      end
-    end
-  end
-
   test "should fetch live departures" do
     # TODO(ollysmith): actually parse and validate the response JSON
     stub_request(:get, URL)
