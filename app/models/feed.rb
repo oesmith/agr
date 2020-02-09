@@ -13,9 +13,6 @@ class Feed < ActiveRecord::Base
   def refresh
     begin
       res = Net::HTTP.get_response(URI(url))
-    rescue Exception => e
-      update_error(e.to_s)
-    else
       case res
       when Net::HTTPSuccess
         parse(res.body)
@@ -24,6 +21,8 @@ class Feed < ActiveRecord::Base
       else
         update_error(res.to_s)
       end
+    rescue Exception => e
+      update_error(e.to_s)
     end
     save
   end
