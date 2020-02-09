@@ -1,4 +1,13 @@
 module TwitterStreamsHelper
+  def tweet_author_link(tweet)
+    link_to(
+      "@#{tweet.user.screen_name}",
+      "https://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}",
+      class: "tweet-author-link",
+      target: "_blank",
+    )
+  end
+
   def replace_entities(tweet)
     if (tweet.urls? || tweet.media?)
       urls = (tweet.urls + tweet.media).sort_by { |u| u.indices.first }

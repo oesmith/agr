@@ -28,8 +28,17 @@
   word-wrap: break-word;
 }
 
-.tweet-author-screen-name {
+.tweet-author-name {
   font-weight: bold;
+}
+
+.tweet-author-screen-name {
+  // font-weight: bold;
+}
+
+a.tweet-author-link {
+  color: black;
+  // text-decoration: none;
 }
 
 .tweet-media {

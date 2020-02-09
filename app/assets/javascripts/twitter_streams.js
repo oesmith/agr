@@ -5,6 +5,7 @@ document.addEventListener('turbolinks:load', function() {
       const container = e.target.parentNode;
       container.classList.remove('tweet-data-closed');
       container.classList.add('tweet-data-open');
+      e.preventDefault();
       e.stopPropagation();
     });
   }
@@ -15,6 +16,7 @@ document.addEventListener('turbolinks:load', function() {
       const container = e.target.parentNode;
       container.classList.remove('tweet-data-open');
       container.classList.add('tweet-data-closed');
+      e.preventDefault();
       e.stopPropagation();
     });
   }

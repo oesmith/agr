@@ -1,12 +1,15 @@
 <div class="tweet-content">
-  <span class="tweet-author">
+  <div class="tweet-author">
+    <span class="tweet-author-name">
+      <%= tweet.user.name %>
+    </span>
     <span class="tweet-author-screen-name">
-      @<%= tweet.user.screen_name %>
+      <%= tweet_author_link(tweet) %>
     </span>
     <% if tweet.retweeted_status? %>
       retweeted
     <% end %>
-  </span>
+  </div>
   <% if tweet.retweeted_status? %>
     <div class="tweet-retweet">
       <%= render partial: "tweet_content", locals: { tweet: tweet.retweeted_status } %>
