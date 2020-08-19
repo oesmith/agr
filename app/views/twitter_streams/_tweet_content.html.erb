@@ -36,7 +36,7 @@
               <video class="tweet-media-gif-video" controls loop
                   poster="<%= proxy_image media.media_url_https %>">
                 <% media.video_info.variants.each do |v| %>
-                  <source src="<%= v.url %>" type="<%= v[:type] %>"/>
+                  <source src="<%= proxy_image v.url %>" type="<%= v[:content_type] %>"/>
                 <% end %>
               </video>
             </li>
@@ -45,7 +45,7 @@
               <video class="tweet-media-video-video" controls preload="none"
                   poster="<%= proxy_image media.media_url_https %>">
                 <% media.video_info.variants.each do |v| %>
-                  <source src="<%= v.url %>" type="<%= v[:type] %>"/>
+                  <source src="<%= proxy_image v.url %>" type="<%= v[:content_type] %>"/>
                 <% end %>
               </video>
             </li>
