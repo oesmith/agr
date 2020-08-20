@@ -38,6 +38,7 @@ group :development do
   gem "spring"
 
   # Use Capistrano for deployment
+  gem "capistrano-chruby"
   gem "capistrano-rails"
   gem "capistrano3-unicorn"
   gem "ed25519", "< 2.0"

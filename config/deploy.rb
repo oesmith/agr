@@ -1,8 +1,9 @@
 # config valid only for current version of Capistrano
-lock "3.11.0"
+lock "3.14.1"
 
 set :application, "agr"
 set :repo_url, "git@github.com:oesmith/agr.git"
+set :chruby_ruby, '2.7.1'
 
 # Default branch is :master
 set :branch, :rails
