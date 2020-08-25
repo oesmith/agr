@@ -5,6 +5,7 @@ gem "htmlentities"
 gem "nokogiri"
 gem "omniauth"
 gem "omniauth-twitter"
+gem "ruby-readability"
 gem "twitter"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

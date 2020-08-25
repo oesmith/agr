@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get "auth/twitter/callback" => "callback#twitter"
   resources :twitter_streams
 
+  get "read" => "read#show"
+
   root "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

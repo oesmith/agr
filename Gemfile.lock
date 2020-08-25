@@ -90,6 +90,7 @@ GEM
       rake
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    guess_html_encoding (0.0.11)
     hashdiff (1.0.1)
     hashie (4.1.0)
     htmlentities (4.3.4)
@@ -179,6 +180,9 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    ruby-readability (0.7.0)
+      guess_html_encoding (>= 0.0.4)
+      nokogiri (>= 1.6.0)
     safe_yaml (1.0.5)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -263,6 +267,7 @@ DEPENDENCIES
   omniauth-twitter
   rails (~> 5.0)
   rails-controller-testing
+  ruby-readability
   sassc-rails
   spring
   sqlite3
