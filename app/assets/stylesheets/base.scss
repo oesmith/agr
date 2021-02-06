@@ -90,6 +90,10 @@ header a:hover {
   text-decoration: none;
 }
 
+.button.sel {
+  background-color: #B53F51;
+}
+
 .button + .button {
   margin-left: 8px;
 }

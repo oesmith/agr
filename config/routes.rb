@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :feeds
-  resources :news
+  get "news", to: "news#index", as: "default_news"
+  get "news/:tag", to: "news#index", as: "news"
 
   resources :trains
   get "train/:from/:to" => "trains#view"

@@ -1,7 +1,11 @@
 <h1>News</h1>
 <p>
-  Most recent update <%= time_ago_in_words(@feeds.map(&:updated_at).max) %> ago
+  Most recent update <%= time_ago_in_words(@last_update) %> ago
+  (<%= link_to "manage", feeds_path %>)
 </p>
-<%= link_to "Manage feeds", feeds_path, class: "button" %>
+<%= link_to "default", default_news_path, class: "button#{@tag.nil? ? " sel" : ""}" %>
+<% @tags.each do |tag| %>
+  <%= link_to tag, news_path(tag), class: "button#{@tag==tag ? " sel" : ""}" %>
+<% end %>
 
 <%= render partial: "posts", object: @articles %>

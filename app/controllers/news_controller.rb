@@ -1,12 +1,19 @@
 class NewsController < ApplicationController
   def index
-    @feeds = Feed.where(user_id: current_user)
-    @articles = @feeds
+    @tag = params[:tag]
+    @last_update = Feed.where(user_id: current_user)
+      .pluck(:updated_at)
+      .max
+    @articles = Feed.where(user_id: current_user, tag: @tag)
       .select(&:has_articles?)
       .flat_map(&:articles)
       .sort_by(&:published_at)
       .reverse
       .first(50)
+    @tags = Feed.where(user_id: current_user)
+      .pluck(:tag)
+      .uniq
+      .reject(&:nil?)
   end
 
   private

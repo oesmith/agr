@@ -8,5 +8,10 @@
   <%= @feed.url %>
 </p>
 
+<p>
+  <strong>Tag:</strong>
+  <%= @feed.tag %>
+</p>
+
 <%= link_to "Edit", edit_feed_path(@feed), class: :button %>
 <%= link_to "Back", feeds_path, class: :button %>

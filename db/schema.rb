@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_06_111329) do
+ActiveRecord::Schema.define(version: 2021_02_06_204608) do
 
   create_table "feeds", force: :cascade do |t|
     t.string "url"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_02_06_111329) do
     t.integer "user_id"
     t.binary "articles_json"
     t.text "error_text"
+    t.string "tag"
   end
 
   create_table "links", force: :cascade do |t|
