@@ -18,6 +18,12 @@
   color: #444;
 }
 
+@media (prefers-color-scheme: dark) {
+  .twitter-profile-name {
+    color: #eee;
+  }
+}
+
 .twitter-timeline {
   list-style-type: none;
   margin: 0;
@@ -33,18 +39,34 @@
   word-wrap: break-word;
 }
 
+@media (prefers-color-scheme: dark) {
+  .tweet {
+    border: 1px solid #666;
+    box-shadow: none;
+  }
+}
+
 .tweet-author-name {
   font-weight: 600;
   color: #444;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tweet-author-name {
+    font-weight: 500;
+    color: #ddd;
+  }
 }
 
 .tweet-author-screen-name {
   // font-weight: bold;
 }
 
-a.tweet-author-link {
-  color: black;
-  // text-decoration: none;
+@media (prefers-color-scheme: light) {
+  a.tweet-author-link {
+    color: black;
+    // text-decoration: none;
+  }
 }
 
 .tweet-media {

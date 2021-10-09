@@ -101,3 +101,35 @@ header a:hover {
 svg {
   fill: currentColor;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+    color: #eee;
+  }
+
+  h1, h2, h3 {
+    color: #eee;
+  }
+
+  input {
+    background-color: #222;
+    color: white;
+  }
+
+  a {
+    color: #cc6600;
+  }
+
+  .header {
+    background-color: #442200;
+  }
+
+  .button {
+    background-color: #884400;
+  }
+
+  .button.sel {
+    background-color: #aa2200;
+  }
+}
