@@ -20,7 +20,7 @@ class ReadController < ApplicationController
         @content = doc.content
         render :show
       rescue
-        render :failure
+        render :error
       end
     end
   end
