@@ -13,10 +13,15 @@ class ReadController < ApplicationController
     if @url.nil?
       render :empty
     else
-      html = open(@url).read
-      doc = Readability::Document.new(html,  tags: TAGS_ALLOWED, attributes: ATTRS_ALLOWED)
-      @title = doc.title
-      @content = doc.content
+      begin
+        html = open(@url).read
+        doc = Readability::Document.new(html,  tags: TAGS_ALLOWED, attributes: ATTRS_ALLOWED)
+        @title = doc.title
+        @content = doc.content
+        render :show
+      rescue
+        render :failure
+      end
     end
   end
 end
