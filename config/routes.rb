@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   resources :trains
   get "train/:from/:to" => "trains#view"
 
-  resources :streams
-  get "auth/twitter/callback" => "callback#twitter"
-  resources :twitter_streams
+  # resources :streams
+  # get "auth/twitter/callback" => "callback#twitter"
+  # resources :twitter_streams
 
   get "read" => "read#show"
 
