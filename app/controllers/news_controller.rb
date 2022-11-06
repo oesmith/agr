@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   def index
-    @tag = params[:tag]
+    @tag = params[:tag] || ""
     @last_update = Feed.where(user_id: current_user)
       .pluck(:updated_at)
       .max
@@ -13,7 +13,7 @@ class NewsController < ApplicationController
     @tags = Feed.where(user_id: current_user)
       .pluck(:tag)
       .uniq
-      .reject(&:nil?)
+      .reject(&:empty?)
   end
 
   private
