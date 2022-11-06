@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +13,7 @@
     <% @feeds.each do |feed| %>
       <tr>
         <td><% if feed.name %><%= feed.name %><% else %><%= feed.url %><% end %></td>
+        <td><% unless feed.error_text.nil? %>ERR<% end %></td>
         <td><%= link_to "Show", feed, class: :button %></td>
         <td><%= link_to "Edit", edit_feed_path(feed), class: :button %></td>
         <td><%= link_to "Destroy", feed, method: :delete, data: { confirm: "Are you sure?" }, class: :button %></td>

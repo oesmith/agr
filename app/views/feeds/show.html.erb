@@ -13,5 +13,10 @@
   <%= @feed.tag %>
 </p>
 
+<p>
+  <strong>Error:</strong>
+  <pre><%= @feed.error_text %></pre>
+</p>
+
 <%= link_to "Edit", edit_feed_path(@feed), class: :button %>
 <%= link_to "Back", feeds_path, class: :button %>
